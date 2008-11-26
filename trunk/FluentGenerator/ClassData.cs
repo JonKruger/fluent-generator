@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FluentGenerator
 {
-    public class ClassData
+    public class ClassData : IGeneratable
     {
         private string _className;
         private bool _withPropertyChanging;
@@ -15,8 +15,9 @@ namespace FluentGenerator
         private IList<ClassListData> _lists = new List<ClassListData>();
         private string _databaseTableName;
 
-        public ClassData()
+        public string Generate()
         {
+            throw new NotImplementedException();
         }
 
         public ClassData WithName(string className)
