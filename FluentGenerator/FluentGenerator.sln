@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentGenerator", "FluentGenerator.csproj", "{CBFAD952-8C87-41D0-B23A-501BBAB39BA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentGenerator.Example", "..\FluentGenerator.Example\FluentGenerator.Example.csproj", "{07BD1DA3-E9BE-4E90-8F62-60C6B281386D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBFAD952-8C87-41D0-B23A-501BBAB39BA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBFAD952-8C87-41D0-B23A-501BBAB39BA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBFAD952-8C87-41D0-B23A-501BBAB39BA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBFAD952-8C87-41D0-B23A-501BBAB39BA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07BD1DA3-E9BE-4E90-8F62-60C6B281386D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07BD1DA3-E9BE-4E90-8F62-60C6B281386D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07BD1DA3-E9BE-4E90-8F62-60C6B281386D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07BD1DA3-E9BE-4E90-8F62-60C6B281386D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
