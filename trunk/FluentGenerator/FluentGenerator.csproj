@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassData.cs" />
+    <Compile Include="Extensions\StringArrayExtension.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="IGeneratable.cs" />
     <Compile Include="IGenerator.cs" />
