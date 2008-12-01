@@ -9,10 +9,10 @@ namespace FluentGenerator
 {
     public abstract class Generator : IGenerator
     {
-        private static Generator _current;
+        private static IGenerator _current;
         private IFileSystemService _fileSystemService;
 
-        public static Generator Current
+        public static IGenerator Current
         {
             get { return _current; }
         }
@@ -31,7 +31,7 @@ namespace FluentGenerator
 
         public abstract void Generate(IGenerationOptions options);
 
-        public void GenerateFile(OutputFile file)
+        public virtual void GenerateFile(OutputFile file)
         {
             foreach (var item in file.GeneratableItems)
             {
