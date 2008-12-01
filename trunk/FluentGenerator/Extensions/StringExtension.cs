@@ -8,9 +8,22 @@ namespace FluentGenerator.Extensions
 {
     public static class StringExtension
     {
-        public static string[] IntoLines(this string s)
+        public static string[] ToLinesArray(this string s)
         {
             return Regex.Split(s, "\r\n");
+        }
+
+        public static string After(this string s, string after)
+        {
+            if (s == null)
+                throw new ArgumentNullException("s");
+            if (after == null)
+                throw new ArgumentNullException("after");
+
+            int index = s.IndexOf(after);
+            if (index == -1)
+                throw new InvalidOperationException("String not found.");
+            return s.Substring(index + after.Length);
         }
     }
 }

@@ -56,6 +56,7 @@
     <Compile Include="ClassDataTest.cs" />
     <Compile Include="Extension\StringArrayExtensionTest.cs" />
     <Compile Include="Extension\StringExtensionTest.cs" />
+    <Compile Include="GeneratorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Specification.cs" />
     <Compile Include="TestExtension.cs" />
