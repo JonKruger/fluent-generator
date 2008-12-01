@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FluentGenerator.Extensions;
 
 namespace FluentGenerator
 {
@@ -17,7 +18,8 @@ namespace FluentGenerator
 
         public string Generate()
         {
-            throw new NotImplementedException();
+            StringBuilder output = new StringBuilder();
+            output.AppendLineFormat("public class {0}")
         }
 
         public ClassData WithName(string className)
