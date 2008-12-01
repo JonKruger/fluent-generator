@@ -29,7 +29,7 @@ namespace FluentGenerator
             _fileSystemService = ObjectFactory.GetInstance<IFileSystemService>();
         }
 
-        public abstract void Generate(IGenerationOptions options);
+        public abstract void Generate();
 
         public virtual void GenerateFile(OutputFile file)
         {
