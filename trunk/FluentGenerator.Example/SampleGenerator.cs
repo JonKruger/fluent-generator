@@ -7,7 +7,7 @@ namespace FluentGenerator.Example
 {
     public class SampleGenerator : Generator
     {
-        public override void Generate(IGenerationOptions options)
+        public override void Generate()
         {
             using (new OutputFile(@"Driver.cs"))
             {

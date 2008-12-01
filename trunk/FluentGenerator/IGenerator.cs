@@ -2,7 +2,7 @@ namespace FluentGenerator
 {
     public interface IGenerator
     {
-        void Generate(IGenerationOptions options);
+        void Generate();
         void GenerateFile(OutputFile file);
     }
 }
