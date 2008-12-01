@@ -7,7 +7,7 @@ namespace FluentGenerator.Example
 {
     public class SampleGenerator : Generator
     {
-        public override void Generate()
+        public override void Generate(IGenerationOptions options)
         {
             using (new OutputFile(@"Driver.cs"))
             {
@@ -15,8 +15,8 @@ namespace FluentGenerator.Example
                     .WithPropertyChanging()
                     .WithPropertyChanged()
                     .AddPrimaryKeyProperty("DriverId")
-                    .AddProperty<string>("Name")
-                    .AddProperty<string>("Address")
+                    .AddProperty("Name").OfType("string")
+                    .AddProperty("Address").OfType("string")
                     .AddListOf("Truck").WithName("Trucks");
 
                 CreateClass("Truck")

@@ -44,11 +44,11 @@ namespace FluentGenerator
             return this;
         }
 
-        public ClassPropertyData AddProperty<T>(string name)
+        public ClassPropertyData AddProperty(string name)
         {
             ClassPropertyData propertyData = new ClassPropertyData(this);
             _properties.Add(propertyData.WithName(name));
-            return propertyData;
+            return propertyData;            
         }
 
         public ClassListData AddListOf(string listType)
@@ -69,6 +69,7 @@ namespace FluentGenerator
     {
         private ClassData _parent;
         private string _name;
+        private string _type;
 
         public ClassPropertyData(ClassData parent)
         {
@@ -78,6 +79,12 @@ namespace FluentGenerator
         public ClassPropertyData WithName(string name)
         {
             _name = name;
+            return this;
+        }
+
+        public ClassPropertyData OfType(string type)
+        {
+            _type = type;
             return this;
         }
     }

@@ -7,16 +7,16 @@ namespace FluentGenerator
     public class OutputFile : IDisposable
     {
         private static OutputFile _current;
-        private List<ClassData> _classes = new List<ClassData>();
+        private List<IGeneratable> _generatableItems = new List<IGeneratable>();
 
         public static OutputFile Current
         {
             get { return _current; }
         }
 
-        public ReadOnlyCollection<ClassData> Classes
+        public List<IGeneratable> GeneratableItems
         {
-            get { return _classes.AsReadOnly(); }
+            get { return _generatableItems; }
         }
 
         public string Path { get; private set; }
@@ -26,9 +26,9 @@ namespace FluentGenerator
             Path = path;
         }
 
-        public void AddClass(ClassData classData)
+        public void AddGeneratableItem(IGeneratable item)
         {
-            _classes.Add(classData);
+            _generatableItems.Add(item);
         }
 
         public void Dispose()
