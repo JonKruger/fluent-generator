@@ -38,6 +38,13 @@ namespace FluentGenerator.Tests
             _generator.GenerateFile(_outputFile);
         }
 
+        protected override void After_each()
+        {
+            base.After_each();
+
+            OutputFile.Current = null;
+        }
+
         [Test]
         public void Should_generate_each_item_in_the_OutputFile()
         {

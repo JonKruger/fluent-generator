@@ -12,6 +12,7 @@ namespace FluentGenerator
         public static OutputFile Current
         {
             get { return _current; }
+            set { _current = value; }
         }
 
         public List<IGeneratable> GeneratableItems
@@ -23,7 +24,11 @@ namespace FluentGenerator
 
         public OutputFile(string path)
         {
+            if (_current != null)
+                throw new InvalidOperationException("A new OutputFile cannot be created until the previous one has been disposed.");
+
             Path = path;
+            _current = this;
         }
 
         public void AddGeneratableItem(IGeneratable item)
@@ -34,6 +39,7 @@ namespace FluentGenerator
         public void Dispose()
         {
             Generator.Current.GenerateFile(this);
+            _current = null;
         }
     }
 }
