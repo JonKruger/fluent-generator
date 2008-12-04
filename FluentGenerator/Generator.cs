@@ -33,21 +33,21 @@ namespace FluentGenerator
 
         public virtual void GenerateFile(OutputFile file)
         {
-            foreach (var item in file.GeneratableItems)
-            {
-                string generatedStuff = item.Generate();
-                _fileSystemService.WriteToFile(file.Path, generatedStuff);
-            }
+            //foreach (var item in file.GeneratableItems)
+            //{
+            //    string generatedStuff = item.Generate();
+            //    _fileSystemService.WriteToFile(file.Path, generatedStuff);
+            //}
         }
 
-        protected ClassData CreateClass()
+        protected ClassExpression CreateClass()
         {
             return CreateClass(null);
         }
 
-        protected ClassData CreateClass(string className)
+        protected ClassExpression CreateClass(string className)
         {
-            ClassData classData = new ClassData();
+            ClassExpression classData = new ClassExpression();
             OutputFile.Current.AddGeneratableItem(classData);
 
             if (!string.IsNullOrEmpty(className))

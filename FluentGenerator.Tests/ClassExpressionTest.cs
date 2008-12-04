@@ -18,8 +18,8 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("{");
             expected.AppendLineFormat("}");
 
-            ClassData data = new ClassData().WithName("Sample");
-            data.Generate().ShouldBe(expected.ToString());
+            ClassExpression data = new ClassExpression().WithName("Sample");
+            data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
@@ -31,8 +31,8 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    public int PrimaryKey { get; set; }");
             expected.AppendLineFormat("}");
 
-            ClassData data = new ClassData().WithName("Sample").AddPrimaryKeyProperty("PrimaryKey");
-            data.Generate().ShouldBe(expected.ToString());
+            ClassExpression data = new ClassExpression().WithName("Sample").AddPrimaryKeyProperty("PrimaryKey");
+            data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
@@ -44,15 +44,15 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    public abc Something { get; set; }");
             expected.AppendLineFormat("}");
 
-            ClassData data = new ClassData().WithName("Sample").AddProperty("Something").OfType("abc");
-            data.Generate().ShouldBe(expected.ToString());
+            ClassExpression data = new ClassExpression().WithName("Sample").AddProperty("Something").OfType("abc");
+            data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
         [ExpectedException(typeof(GenerationException))]
         public void Should_throw_exception_if_the_type_of_a_property_is_not_specified()
         {
-            new ClassData().WithName("Sample").AddProperty("abc").Generate();
+            new ClassExpression().WithName("Sample").AddProperty("abc").Generate();
         }
 
         [Test]
@@ -70,15 +70,15 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    }");
             expected.AppendLineFormat("}");
 
-            ClassData data = new ClassData().WithName("Sample").AddListOf("abc").WithName("SomeList");
-            data.Generate().ShouldBe(expected.ToString());
+            ClassExpression data = new ClassExpression().WithName("Sample").AddListOf("abc").WithName("SomeList");
+            data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
         [ExpectedException(typeof(GenerationException))]
         public void Should_throw_exception_if_the_name_of_a_list_is_not_specified()
         {
-            new ClassData().WithName("Sample").AddListOf("abc").Generate();
+            new ClassExpression().WithName("Sample").AddListOf("abc").Generate();
         }
     }
 
@@ -107,8 +107,8 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    }");
             expected.AppendLineFormat("}");
 
-            ClassData data = new ClassData().WithName("Sample").WithPropertyChanging();
-            data.Generate().ShouldBe(expected.ToString());
+            ClassExpression data = new ClassExpression().WithName("Sample").WithPropertyChanging();
+            data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
@@ -151,8 +151,8 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    }");
             expected.AppendLineFormat("}");
 
-            ClassData data = new ClassData().WithName("Sample").WithPropertyChanging();
-            data.Generate().ShouldBe(expected.ToString());
+            ClassExpression data = new ClassExpression().WithName("Sample").WithPropertyChanging();
+            data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
     }
 
@@ -181,8 +181,8 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    }");
             expected.AppendLineFormat("}");
 
-            ClassData data = new ClassData().WithName("Sample").WithPropertyChanged();
-            data.Generate().ShouldBe(expected.ToString());
+            ClassExpression data = new ClassExpression().WithName("Sample").WithPropertyChanged();
+            data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
@@ -225,8 +225,8 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    }");
             expected.AppendLineFormat("}");
 
-            ClassData data = new ClassData().WithName("Sample").WithPropertyChanged().AddProperty("Something").OfType("string");
-            data.Generate().ShouldBe(expected.ToString());
+            ClassExpression data = new ClassExpression().WithName("Sample").WithPropertyChanged().AddProperty("Something").OfType("string");
+            data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
     }
 
@@ -270,8 +270,8 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    }");
             expected.AppendLineFormat("}");
 
-            ClassData data = new ClassData().WithName("Sample").WithPropertyChanging().WithPropertyChanged();
-            data.Generate().ShouldBe(expected.ToString());
+            ClassExpression data = new ClassExpression().WithName("Sample").WithPropertyChanging().WithPropertyChanged();
+            data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
@@ -329,8 +329,8 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    }");
             expected.AppendLineFormat("}");
 
-            ClassData data = new ClassData().WithName("Sample").WithPropertyChanging().WithPropertyChanged().AddProperty("Something").OfType("string");
-            data.Generate().ShouldBe(expected.ToString());
+            ClassExpression data = new ClassExpression().WithName("Sample").WithPropertyChanging().WithPropertyChanged().AddProperty("Something").OfType("string");
+            data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
     }
 

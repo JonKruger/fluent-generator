@@ -25,8 +25,8 @@ namespace FluentGenerator.Tests
             _generatable2 = Mock<IGeneratable>();
             _fileSystemService = Mock<IFileSystemService>();
 
-            _generatable1.Stub(g => g.Generate()).Return("value1");
-            _generatable2.Stub(g => g.Generate()).Return("value2");
+            _generatable1.Stub(g => g.Generate()).Return(new GenerationOutput("value1"));
+            _generatable2.Stub(g => g.Generate()).Return(new GenerationOutput("value2"));
 
             _outputFile = new OutputFile(@"c:\path.txt");
             _outputFile.AddGeneratableItem(_generatable1);

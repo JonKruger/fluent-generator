@@ -25,5 +25,19 @@ namespace FluentGenerator.Extensions
                 throw new InvalidOperationException("String not found.");
             return s.Substring(index + after.Length);
         }
+
+        public static string ToCamelCaseUnderscore(this string s)
+        {
+            if (s == null)
+                return null;
+
+            if (s.StartsWith("_") || s == "")
+                return s;
+
+            string result = "_" + s.Substring(0, 1).ToLower();
+            if (s.Length > 1)
+                result += s.Substring(1);
+            return result;
+        }
     }
 }
