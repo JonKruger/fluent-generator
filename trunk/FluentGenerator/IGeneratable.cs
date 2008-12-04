@@ -2,6 +2,6 @@ namespace FluentGenerator
 {
     public interface IGeneratable
     {
-        string Generate();
+        IGenerationOutput Generate();
     }
 }
