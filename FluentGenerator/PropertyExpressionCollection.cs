@@ -11,15 +11,15 @@ namespace FluentGenerator
         {
             StringBuilder output = new StringBuilder();
 
-            List<PropertyWithBackingField> propertiesWithBackingFields = new List<PropertyWithBackingField>();
+            List<IFieldExpression> backingFields = new List<IFieldExpression>();
             foreach (var propertyExpression in this)
-                propertiesWithBackingFields.Add(propertyExpression.GeneratePropertyWithBackingField());
+                backingFields.Add(propertyExpression.ExtractBackingFieldExpression());
 
-            foreach (var field in propertiesWithBackingFields.Select(pwbf => pwbf.BackingFieldText))
-                output.AppendLine(field);
+            foreach (var field in backingFields)
+                output.AppendLine(field.Generate().Output.ToString());
             output.AppendLine();
-            foreach (var property in propertiesWithBackingFields.Select(pwbf => pwbf.PropertyText))
-                output.AppendLine(property);
+            foreach (var propertyExpression in this)
+                output.AppendLine(propertyExpression.GeneratePropertyOnly());
 
             return new GenerationOutput(output.ToString());
         }

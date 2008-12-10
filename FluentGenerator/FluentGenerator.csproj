@@ -56,6 +56,7 @@
     <Compile Include="Extensions\StringArrayExtension.cs" />
     <Compile Include="Extensions\StringBuilderExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="FieldExpression.cs" />
     <Compile Include="FieldExpressionCollection.cs" />
     <Compile Include="FluentGeneratorRegistry.cs" />
     <Compile Include="GenerationException.cs" />
@@ -78,7 +79,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyExpression.cs" />
     <Compile Include="PropertyExpressionCollection.cs" />
-    <Compile Include="PropertyWithBackingField.cs" />
     <Compile Include="Service\FileSystemService.cs" />
     <Compile Include="Service\IFileSystemService.cs" />
   </ItemGroup>

@@ -1,3 +1,4 @@
 ﻿- generate properties, methods, fields
 - indentation
 - options
+- split generation out of the *Expression classes

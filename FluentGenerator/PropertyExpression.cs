@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace FluentGenerator
 {
@@ -18,10 +19,14 @@ namespace FluentGenerator
             throw new NotImplementedException();            
         }
 
-        public PropertyWithBackingField GeneratePropertyWithBackingField()
+        public IFieldExpression ExtractBackingFieldExpression()
         {
-            PropertyWithBackingField result = new PropertyWithBackingField();
             throw new NotImplementedException();
+        }
+
+        public string GeneratePropertyOnly()
+        {
+            throw new System.NotImplementedException();
         }
 
         public new PropertyExpression WithName(string name)

@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+
 namespace FluentGenerator
 {
     public interface IPropertyExpression : IGeneratable
     {
-        PropertyWithBackingField GeneratePropertyWithBackingField();
+        IFieldExpression ExtractBackingFieldExpression();
+        string GeneratePropertyOnly();
     }
 }
