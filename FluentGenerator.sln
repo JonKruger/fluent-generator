@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentGenerator", "FluentGenerator.csproj", "{CBFAD952-8C87-41D0-B23A-501BBAB39BA5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentGenerator", "FluentGenerator\FluentGenerator.csproj", "{CBFAD952-8C87-41D0-B23A-501BBAB39BA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentGenerator.Example", "..\FluentGenerator.Example\FluentGenerator.Example.csproj", "{07BD1DA3-E9BE-4E90-8F62-60C6B281386D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentGenerator.Example", "FluentGenerator.Example\FluentGenerator.Example.csproj", "{07BD1DA3-E9BE-4E90-8F62-60C6B281386D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentGenerator.Tests", "..\FluentGenerator.Tests\FluentGenerator.Tests.csproj", "{1C7F0C8B-D860-4A12-B4D8-9E2C7E337D4C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentGenerator.Tests", "FluentGenerator.Tests\FluentGenerator.Tests.csproj", "{1C7F0C8B-D860-4A12-B4D8-9E2C7E337D4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
