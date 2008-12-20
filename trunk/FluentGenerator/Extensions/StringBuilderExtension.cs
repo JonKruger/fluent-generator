@@ -9,7 +9,10 @@ namespace FluentGenerator.Extensions
     {
         public static void AppendLineFormat(this StringBuilder sb, string s, params object[] args)
         {
-            sb.AppendLine(string.Format(s, args));
+            if (args != null && args.Length > 0)
+                sb.AppendLine(string.Format(s, args));
+            else
+                sb.AppendLine(s);
         }
     }
 }

@@ -16,17 +16,18 @@ namespace FluentGenerator
 
         public override IGenerationOutput Generate()
         {
-            throw new NotImplementedException();
+            var output = string.Format("public IList<{0}> {1} {{ get; set; }}", _objectType, _name);
+            return new GenerationOutput(output);
         }
 
         public IFieldExpression ExtractBackingFieldExpression()
         {
-            throw new System.NotImplementedException();
+            return new FieldExpression().OfType(string.Format("IList<{0}>", _objectType)).WithName(_name);
         }
 
         public string GeneratePropertyOnly()
         {
-            throw new System.NotImplementedException();
+            return string.Format("public {0} {1} {{ get; set; }}", string.Format("IList<{0}>", _objectType), _name);
         }
 
         public ListExpression Of(string objectType)
