@@ -16,6 +16,17 @@ namespace FluentGenerator
         private PropertyExpressionCollection _properties = new PropertyExpressionCollection();
         private MethodExpressionCollection _methods = new MethodExpressionCollection();
         private string _databaseTableName;
+        private readonly IGenerator _generator;
+
+        public IGenerator Generator
+        {
+            get { return _generator; }
+        }
+
+        public ClassExpression(IGenerator generator)
+        {
+            _generator = generator;
+        }
 
         public virtual IGenerationOutput Generate()
         {

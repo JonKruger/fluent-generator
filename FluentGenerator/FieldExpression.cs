@@ -11,6 +11,10 @@ namespace FluentGenerator
         private string _name;
         private string _type;
 
+        public FieldExpression(IGenerator generator) : base(generator)
+        {
+        }
+
         public override IGenerationOutput Generate()
         {
             var output = string.Format("public {0} {1};", _type, _name.ToCamelCaseUnderscore());

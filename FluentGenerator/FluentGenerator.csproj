@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassExpression.cs" />
+    <Compile Include="CodeWriter.cs" />
     <Compile Include="Extensions\StringArrayExtension.cs" />
     <Compile Include="Extensions\StringBuilderExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="GenerationOutput.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="IClassExpression.cs" />
+    <Compile Include="ICodeWriter.cs" />
     <Compile Include="IFieldExpression.cs" />
     <Compile Include="IFieldExpressionCollection.cs" />
     <Compile Include="IGeneratable.cs" />

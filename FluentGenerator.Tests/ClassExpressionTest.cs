@@ -7,8 +7,20 @@ using NUnit.Framework;
 
 namespace FluentGenerator.Tests
 {
+    public class Given_a_Generator : Specification
+    {
+        protected IGenerator _generator;
+
+        protected override void Before_each()
+        {
+            base.Before_each();
+
+            _generator = Stub<IGenerator>();
+        } 
+    }
+
     [TestFixture]
-    public class When_generating_a_class : Specification
+    public class When_generating_a_class : Given_a_Generator
     {
         [Test]
         public void Should_write_out_the_class_name()
@@ -18,7 +30,7 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("{");
             expected.AppendLineFormat("}");
 
-            ClassExpression data = new ClassExpression().WithName("Sample");
+            ClassExpression data = new ClassExpression(_generator).WithName("Sample");
             data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
 
@@ -31,7 +43,7 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    public int PrimaryKey { get; set; }");
             expected.AppendLineFormat("}");
 
-            ClassExpression data = new ClassExpression().WithName("Sample").AddPrimaryKeyProperty("PrimaryKey");
+            ClassExpression data = new ClassExpression(_generator).WithName("Sample").AddPrimaryKeyProperty("PrimaryKey");
             data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
 
@@ -44,7 +56,7 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    public abc Something { get; set; }");
             expected.AppendLineFormat("}");
 
-            ClassExpression data = new ClassExpression().WithName("Sample").AddProperty("Something").OfType("abc");
+            ClassExpression data = new ClassExpression(_generator).WithName("Sample").AddProperty("Something").OfType("abc");
             data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
 
@@ -52,7 +64,7 @@ namespace FluentGenerator.Tests
         [ExpectedException(typeof(GenerationException))]
         public void Should_throw_exception_if_the_type_of_a_property_is_not_specified()
         {
-            new ClassExpression().WithName("Sample").AddProperty("abc").Generate();
+            new ClassExpression(_generator).WithName("Sample").AddProperty("abc").Generate();
         }
 
         [Test]
@@ -70,7 +82,7 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    }");
             expected.AppendLineFormat("}");
 
-            ClassExpression data = new ClassExpression().WithName("Sample").AddListOf("abc").WithName("SomeList");
+            ClassExpression data = new ClassExpression(_generator).WithName("Sample").AddListOf("abc").WithName("SomeList");
             data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
 
@@ -78,12 +90,12 @@ namespace FluentGenerator.Tests
         [ExpectedException(typeof(GenerationException))]
         public void Should_throw_exception_if_the_name_of_a_list_is_not_specified()
         {
-            new ClassExpression().WithName("Sample").AddListOf("abc").Generate();
+            new ClassExpression(_generator).WithName("Sample").AddListOf("abc").Generate();
         }
     }
 
     [TestFixture]
-    public class When_generating_a_class_that_implements_INotifyPropertyChanging : Specification
+    public class When_generating_a_class_that_implements_INotifyPropertyChanging : Given_a_Generator
     {
         [Test]
         public void Should_implement_INotifyPropertyChanging()
@@ -107,7 +119,7 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    }");
             expected.AppendLineFormat("}");
 
-            ClassExpression data = new ClassExpression().WithName("Sample").WithPropertyChanging();
+            ClassExpression data = new ClassExpression(_generator).WithName("Sample").WithPropertyChanging();
             data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
 
@@ -151,13 +163,13 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    }");
             expected.AppendLineFormat("}");
 
-            ClassExpression data = new ClassExpression().WithName("Sample").WithPropertyChanging();
+            ClassExpression data = new ClassExpression(_generator).WithName("Sample").WithPropertyChanging();
             data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
     }
 
     [TestFixture]
-    public class When_generating_a_class_that_implements_INotifyPropertyChanged : Specification
+    public class When_generating_a_class_that_implements_INotifyPropertyChanged : Given_a_Generator
     {
         [Test]
         public void Should_implement_INotifyPropertyChanged()
@@ -181,7 +193,7 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    }");
             expected.AppendLineFormat("}");
 
-            ClassExpression data = new ClassExpression().WithName("Sample").WithPropertyChanged();
+            ClassExpression data = new ClassExpression(_generator).WithName("Sample").WithPropertyChanged();
             data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
 
@@ -225,14 +237,14 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    }");
             expected.AppendLineFormat("}");
 
-            ClassExpression data = new ClassExpression().WithName("Sample").WithPropertyChanged().AddProperty("Something").OfType("string");
+            ClassExpression data = new ClassExpression(_generator).WithName("Sample").WithPropertyChanged().AddProperty("Something").OfType("string");
             data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
     }
 
 
     [TestFixture]
-    public class When_generating_a_class_that_implements_INotifyPropertyChanging_and_INotifyPropertyChanged : Specification
+    public class When_generating_a_class_that_implements_INotifyPropertyChanging_and_INotifyPropertyChanged : Given_a_Generator
     {
         [Test]
         public void Should_implement_INotifyPropertyChanging_and_INotifyPropertyChanged()
@@ -270,7 +282,7 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    }");
             expected.AppendLineFormat("}");
 
-            ClassExpression data = new ClassExpression().WithName("Sample").WithPropertyChanging().WithPropertyChanged();
+            ClassExpression data = new ClassExpression(_generator).WithName("Sample").WithPropertyChanging().WithPropertyChanged();
             data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
 
@@ -329,7 +341,7 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    }");
             expected.AppendLineFormat("}");
 
-            ClassExpression data = new ClassExpression().WithName("Sample").WithPropertyChanging().WithPropertyChanged().AddProperty("Something").OfType("string");
+            ClassExpression data = new ClassExpression(_generator).WithName("Sample").WithPropertyChanging().WithPropertyChanged().AddProperty("Something").OfType("string");
             data.Generate().Output.ToString().ShouldBe(expected.ToString());
         }
     }

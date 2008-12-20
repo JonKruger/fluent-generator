@@ -11,22 +11,33 @@ namespace FluentGenerator
     {
         private static IGenerator _current;
         private IFileSystemService _fileSystemService;
+        private ICodeWriter _codeWriter;
 
         public static IGenerator Current
         {
             get { return _current; }
         }
 
-        public Generator(IFileSystemService fileSystemService) 
+        public ICodeWriter Writer
+        {
+            get
+            {
+                return _codeWriter;
+            }
+        }
+
+        public Generator(IFileSystemService fileSystemService, ICodeWriter codeWriter) 
         {
             _current = this;
             _fileSystemService = fileSystemService;
+            _codeWriter = codeWriter;
         }
 
         public Generator()
         {
             _current = this;
             _fileSystemService = ObjectFactory.GetInstance<IFileSystemService>();
+            _codeWriter = ObjectFactory.GetInstance<ICodeWriter>();
         }
 
         public abstract void Generate();
@@ -47,7 +58,7 @@ namespace FluentGenerator
 
         protected ClassExpression CreateClass(string className)
         {
-            ClassExpression classData = new ClassExpression();
+            ClassExpression classData = new ClassExpression(this);
             OutputFile.Current.AddGeneratableItem(classData);
 
             if (!string.IsNullOrEmpty(className))

@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassExpressionTest.cs" />
+    <Compile Include="CodeWriterTests.cs" />
     <Compile Include="Extensions\StringArrayExtensionTest.cs" />
     <Compile Include="Extensions\StringExtensionTest.cs" />
     <Compile Include="GeneratorTest.cs" />
