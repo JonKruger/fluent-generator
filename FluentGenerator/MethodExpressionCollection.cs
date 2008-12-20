@@ -9,7 +9,10 @@ namespace FluentGenerator
     {
         public IGenerationOutput Generate()
         {
-            throw new System.NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+            foreach (IMethodExpression method in this)
+                sb.AppendLine(method.Generate().Output.ToString());
+            return new GenerationOutput(sb.ToString());
         }
     }
 }

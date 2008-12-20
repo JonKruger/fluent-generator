@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace FluentGenerator
 {
@@ -16,17 +17,21 @@ namespace FluentGenerator
 
         public override IGenerationOutput Generate()
         {
-            throw new NotImplementedException();            
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(ExtractBackingFieldExpression().Generate().Output.ToString());
+            sb.AppendLine();
+            sb.AppendLine(GeneratePropertyOnly());
+            return new GenerationOutput(sb.ToString());
         }
 
-        public IFieldExpression ExtractBackingFieldExpression()
+        public virtual IFieldExpression ExtractBackingFieldExpression()
         {
-            throw new NotImplementedException();
+            return new FieldExpression().OfType(_type).WithName(_name);
         }
 
-        public string GeneratePropertyOnly()
+        public virtual string GeneratePropertyOnly()
         {
-            throw new System.NotImplementedException();
+            return string.Format("public {0} {1} {{ get; set; }}", _type, _name);
         }
 
         public new PropertyExpression WithName(string name)

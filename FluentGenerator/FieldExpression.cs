@@ -14,6 +14,7 @@ namespace FluentGenerator
         public override IGenerationOutput Generate()
         {
             var output = string.Format("public {0} {1};", _type, _name.ToCamelCaseUnderscore());
+            return new GenerationOutput(output);
         }
 
         public new FieldExpression WithName(string name)

@@ -20,7 +20,7 @@ namespace FluentGenerator
         public virtual IGenerationOutput Generate()
         {
             StringBuilder output = new StringBuilder();
-            output.AppendLineFormat("public class {0}");
+            output.AppendLineFormat("public class {0}", _className);
             output.AppendLineFormat("{");
             output.Append(_fields.Generate().Output.ToString());
             output.Append(_properties.Generate().Output.ToString());

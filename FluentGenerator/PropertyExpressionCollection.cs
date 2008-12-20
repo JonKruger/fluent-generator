@@ -17,7 +17,10 @@ namespace FluentGenerator
 
             foreach (var field in backingFields)
                 output.AppendLine(field.Generate().Output.ToString());
-            output.AppendLine();
+    
+            if (output.Length > 0)
+                output.AppendLine();
+            
             foreach (var propertyExpression in this)
                 output.AppendLine(propertyExpression.GeneratePropertyOnly());
 
