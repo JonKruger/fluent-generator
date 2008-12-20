@@ -9,7 +9,7 @@ namespace FluentGenerator
         private string _objectType;
         private string _name;
 
-        public ListExpression(ClassExpression parent)
+        public ListExpression(ClassExpression parent) : base(parent.Generator)
         {
             _parent = parent;
         }
@@ -22,7 +22,7 @@ namespace FluentGenerator
 
         public IFieldExpression ExtractBackingFieldExpression()
         {
-            return new FieldExpression().OfType(string.Format("IList<{0}>", _objectType)).WithName(_name);
+            return new FieldExpression(Generator).OfType(string.Format("IList<{0}>", _objectType)).WithName(_name);
         }
 
         public string GeneratePropertyOnly()

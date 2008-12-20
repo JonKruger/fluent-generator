@@ -10,7 +10,7 @@ namespace FluentGenerator
         private string _name;
         private string _type;
 
-        public PropertyExpression(ClassExpression parent)
+        public PropertyExpression(ClassExpression parent) : base(parent.Generator)
         {
             _parent = parent;
         }
@@ -26,7 +26,7 @@ namespace FluentGenerator
 
         public virtual IFieldExpression ExtractBackingFieldExpression()
         {
-            return new FieldExpression().OfType(_type).WithName(_name);
+            return new FieldExpression(Generator).OfType(_type).WithName(_name);
         }
 
         public virtual string GeneratePropertyOnly()

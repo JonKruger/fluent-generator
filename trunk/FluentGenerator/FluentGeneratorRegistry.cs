@@ -13,6 +13,7 @@ namespace FluentGenerator
             base.configure();
 
             ForRequestedType<IFileSystemService>().TheDefaultIsConcreteType<FileSystemService>();
+            ForRequestedType<ICodeWriter>().TheDefaultIsConcreteType<CodeWriter>();
         }
     }
 }
