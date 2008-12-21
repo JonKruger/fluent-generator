@@ -30,11 +30,11 @@ namespace FluentGenerator.Tests
             _generatable1.Stub(g => g.Generate(_codeWriter)).WhenCalled(method => ((ICodeWriter)method.Arguments[0]).AppendLine("value1"));
             _generatable2.Stub(g => g.Generate(_codeWriter)).WhenCalled(method => ((ICodeWriter)method.Arguments[0]).AppendLine("value2")); 
 
-            _outputFile = new OutputFile(@"c:\path.txt");
+            _outputFile = new OutputFile(@"c:\path.txt", _fileSystemService);
             _outputFile.AddGeneratableItem(_generatable1);
             _outputFile.AddGeneratableItem(_generatable2);
 
-            _generator = Partial<Generator>(_fileSystemService);
+            _generator = Partial<Generator>(_fileSystemService, _codeWriter);
             ReplayAll();
 
             _generator.GenerateFile(_outputFile);

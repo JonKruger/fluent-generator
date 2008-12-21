@@ -11,44 +11,29 @@ namespace FluentGenerator
     {
         private static IGenerator _current;
         private IFileSystemService _fileSystemService;
-        private ICodeWriter _codeWriter;
 
         public static IGenerator Current
         {
             get { return _current; }
         }
 
-        public ICodeWriter Writer
-        {
-            get
-            {
-                return _codeWriter;
-            }
-        }
-
-        public Generator(IFileSystemService fileSystemService, ICodeWriter codeWriter) 
+        public Generator(IFileSystemService fileSystemService) 
         {
             _current = this;
             _fileSystemService = fileSystemService;
-            _codeWriter = codeWriter;
         }
 
         public Generator()
         {
             _current = this;
             _fileSystemService = ObjectFactory.GetInstance<IFileSystemService>();
-            _codeWriter = ObjectFactory.GetInstance<ICodeWriter>();
         }
 
         public abstract void Generate();
 
         public virtual void GenerateFile(OutputFile file)
         {
-            //foreach (var item in file.GeneratableItems)
-            //{
-            //    string generatedStuff = item.Generate();
-            //    _fileSystemService.WriteToFile(file.Path, generatedStuff);
-            //}
+            file.GenerateFile();
         }
 
         protected ClassExpression CreateClass()

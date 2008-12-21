@@ -1,5 +1,4 @@
 ﻿- generate methods
-- indentation
 - options
 - split generation out of the *Expression classes
 - need an "ExpressionFactory" (so that PropertyExpression does not have to new up FieldExpressions)
