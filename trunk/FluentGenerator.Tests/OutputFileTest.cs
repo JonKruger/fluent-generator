@@ -11,9 +11,12 @@ namespace FluentGenerator.Tests
     [TestFixture]
     public class When_creating_an_OutputFile : Specification
     {
+        private IFileSystemService _fileSystemService;
+
         protected override void Before_each()
         {
             base.Before_each();
+            _fileSystemService = Stub<IFileSystemService>();
             OutputFile.Current = null;
         }
 
@@ -26,7 +29,7 @@ namespace FluentGenerator.Tests
         [Test]
         public void Should_set_the_newly_created_OutputFile_as_the_current_one()
         {
-            OutputFile file = new OutputFile("");
+            OutputFile file = new OutputFile("", _fileSystemService);
             OutputFile.Current.ShouldBe(file);
         }
 
@@ -34,8 +37,8 @@ namespace FluentGenerator.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void Should_throw_exception_if_another_OutputFile_is_created_before_the_first_one_is_disposed()
         {
-            OutputFile file1 = new OutputFile("");
-            OutputFile file2 = new OutputFile("");
+            OutputFile file1 = new OutputFile("", _fileSystemService);
+            OutputFile file2 = new OutputFile("", _fileSystemService);
         }
     }
 
@@ -49,12 +52,12 @@ namespace FluentGenerator.Tests
         {
             base.Before_each();
 
-            _generator = Partial<Generator>(Mock<IFileSystemService>());
+            _generator = Partial<Generator>(Stub<IFileSystemService>(), Stub<ICodeWriter>());
             _generator.Stub(g => g.GenerateFile(null)).IgnoreArguments();
 
             ReplayAll();
 
-            using (_outputFile = new OutputFile(""))
+            using (_outputFile = new OutputFile("", Stub<IFileSystemService>()))
             {
 
             }
