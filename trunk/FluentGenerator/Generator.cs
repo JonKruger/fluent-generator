@@ -65,6 +65,5 @@ namespace FluentGenerator
                 classData.WithName(className);
             return classData;
         }
-
     }
 }

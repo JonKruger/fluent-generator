@@ -7,12 +7,10 @@ namespace FluentGenerator
 {
     public class MethodExpressionCollection : List<IMethodExpression>, IMethodExpressionCollection
     {
-        public IGenerationOutput Generate()
+        public void Generate(ICodeWriter codeWriter)
         {
-            StringBuilder sb = new StringBuilder();
             foreach (IMethodExpression method in this)
-                sb.AppendLine(method.Generate().Output.ToString());
-            return new GenerationOutput(sb.ToString());
+                method.Generate(codeWriter);
         }
     }
 }

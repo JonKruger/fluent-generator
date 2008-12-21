@@ -28,16 +28,16 @@ namespace FluentGenerator
             _generator = generator;
         }
 
-        public virtual IGenerationOutput Generate()
+        public virtual void Generate(ICodeWriter codeWriter)
         {
-            StringBuilder output = new StringBuilder();
-            output.AppendLineFormat("public class {0}", _className);
-            output.AppendLineFormat("{");
-            output.Append(_fields.Generate().Output.ToString());
-            output.Append(_properties.Generate().Output.ToString());
-            output.Append(_methods.Generate().Output.ToString());
-            output.AppendLineFormat("}");
-            return new GenerationOutput(output.ToString());
+            codeWriter.AppendLineFormat("public class {0}", _className);
+            codeWriter.AppendLineFormat("{");
+            codeWriter.IncreaseIndent();
+            _fields.Generate(codeWriter);
+            _properties.Generate(codeWriter);
+            _methods.Generate(codeWriter);
+            codeWriter.DecreaseIndent();
+            codeWriter.AppendLineFormat("}");
         }
 
         public ClassExpression WithName(string className)
@@ -60,7 +60,7 @@ namespace FluentGenerator
 
         public ClassExpression AddPrimaryKeyProperty(string propertyName)
         {
-            _primaryKeyProperty = propertyName;
+            AddProperty(propertyName).OfType("int");
             return this;
         }
 

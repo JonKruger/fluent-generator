@@ -37,7 +37,7 @@ namespace FluentGenerator
                 _currentIndent = 0;
         }
 
-        public CodeWriter AppendLine(string s, params object[] args)
+        public ICodeWriter Append(string s)
         {
             if (UseSpaces)
             {
@@ -48,11 +48,32 @@ namespace FluentGenerator
             {
                 if (IndentAmount > 0)
                 {
-                    for (int i = 0; i < _currentIndent/IndentAmount; i++)
+                    for (int i = 0; i < _currentIndent / IndentAmount; i++)
                         _stringBuilder.Append("\t");
                 }
             }
-            _stringBuilder.AppendLineFormat(s, args);
+            _stringBuilder.Append(s);
+            return this;
+        }
+
+        public ICodeWriter AppendLine()
+        {
+            return AppendLine(string.Empty);
+        }
+
+        public ICodeWriter AppendLine(string s)
+        {
+            Append(s + Environment.NewLine);
+            return this;
+        }
+
+        public ICodeWriter AppendLineFormat(string s, params object[] args)
+        {
+            if (args != null && args.Length > 0)    
+                Append(string.Format(s, args));
+            else
+                Append(s);
+            _stringBuilder.AppendLine();
             return this;
         }
 

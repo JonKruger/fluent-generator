@@ -7,24 +7,23 @@ namespace FluentGenerator
 {
     public class PropertyExpressionCollection : List<IPropertyExpression>, IPropertyExpressionCollection
     {
-        public IGenerationOutput Generate()
+        public void Generate(ICodeWriter codeWriter)
         {
-            StringBuilder output = new StringBuilder();
-
             List<IFieldExpression> backingFields = new List<IFieldExpression>();
             foreach (var propertyExpression in this)
-                backingFields.Add(propertyExpression.ExtractBackingFieldExpression());
-
+            {
+                var backingField = propertyExpression.ExtractBackingFieldExpression();
+                if (backingField != null)
+                    backingFields.Add(backingField);
+            }
             foreach (var field in backingFields)
-                output.AppendLine(field.Generate().Output.ToString());
-    
-            if (output.Length > 0)
-                output.AppendLine();
+                field.Generate(codeWriter);
+
+            if (backingFields.Count > 0)
+                codeWriter.AppendLine();
             
             foreach (var propertyExpression in this)
-                output.AppendLine(propertyExpression.GeneratePropertyOnly());
-
-            return new GenerationOutput(output.ToString());
+                propertyExpression.GeneratePropertyOnly(codeWriter);
         }
     }
 }

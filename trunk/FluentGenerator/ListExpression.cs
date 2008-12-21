@@ -14,20 +14,20 @@ namespace FluentGenerator
             _parent = parent;
         }
 
-        public override IGenerationOutput Generate()
-        {
-            var output = string.Format("public IList<{0}> {1} {{ get; set; }}", _objectType, _name);
-            return new GenerationOutput(output);
-        }
-
         public IFieldExpression ExtractBackingFieldExpression()
         {
-            return new FieldExpression(Generator).OfType(string.Format("IList<{0}>", _objectType)).WithName(_name);
+            return null;
+            //return new FieldExpression(Generator).OfType(string.Format("IList<{0}>", _objectType)).WithName(_name);
         }
 
-        public string GeneratePropertyOnly()
+        public void GeneratePropertyOnly(ICodeWriter codeWriter)
         {
-            return string.Format("public {0} {1} {{ get; set; }}", string.Format("IList<{0}>", _objectType), _name);
+            if (_objectType == null)
+                throw new GenerationException(string.Format("List type was not set (property name = {0}).", _name));
+            if (_name == null)
+                throw new GenerationException(string.Format("List name was not set (property type = {0}).", _objectType));
+
+            codeWriter.AppendLineFormat("public {0} {1} {{ get; set; }}", string.Format("IList<{0}>", _objectType), _name);
         }
 
         public ListExpression Of(string objectType)
