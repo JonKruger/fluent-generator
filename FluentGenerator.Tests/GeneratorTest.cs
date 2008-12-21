@@ -16,17 +16,19 @@ namespace FluentGenerator.Tests
         private Generator _generator;
         private IFileSystemService _fileSystemService;
         private OutputFile _outputFile;
+        private CodeWriter _codeWriter;
 
         protected override void Before_each()
         {
             base.Before_each();
 
+            _codeWriter = new CodeWriter();
             _generatable1 = Mock<IGeneratable>();
             _generatable2 = Mock<IGeneratable>();
             _fileSystemService = Mock<IFileSystemService>();
 
-            _generatable1.Stub(g => g.Generate()).Return(new GenerationOutput("value1"));
-            _generatable2.Stub(g => g.Generate()).Return(new GenerationOutput("value2"));
+            _generatable1.Stub(g => g.Generate(_codeWriter)).WhenCalled(method => ((ICodeWriter)method.Arguments[0]).AppendLine("value1"));
+            _generatable2.Stub(g => g.Generate(_codeWriter)).WhenCalled(method => ((ICodeWriter)method.Arguments[0]).AppendLine("value2")); 
 
             _outputFile = new OutputFile(@"c:\path.txt");
             _outputFile.AddGeneratableItem(_generatable1);
@@ -48,8 +50,8 @@ namespace FluentGenerator.Tests
         [Test]
         public void Should_generate_each_item_in_the_OutputFile()
         {
-            _generatable1.AssertWasCalled(g => g.Generate());
-            _generatable2.AssertWasCalled(g => g.Generate());
+            _generatable1.AssertWasCalled(g => g.Generate(_codeWriter));
+            _generatable2.AssertWasCalled(g => g.Generate(_codeWriter));
         }
         
         [Test]

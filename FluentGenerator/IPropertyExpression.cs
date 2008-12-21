@@ -5,6 +5,6 @@ namespace FluentGenerator
     public interface IPropertyExpression : IGeneratable
     {
         IFieldExpression ExtractBackingFieldExpression();
-        string GeneratePropertyOnly();
+        void GeneratePropertyOnly(ICodeWriter codeWriter);
     }
 }

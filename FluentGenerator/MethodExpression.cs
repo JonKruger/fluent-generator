@@ -7,7 +7,7 @@ namespace FluentGenerator
 {
     public class MethodExpression : IMethodExpression
     {
-        public IGenerationOutput Generate()
+        public void Generate(ICodeWriter codeWriter)
         {
             throw new System.NotImplementedException();
         }

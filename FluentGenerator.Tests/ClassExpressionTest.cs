@@ -10,12 +10,14 @@ namespace FluentGenerator.Tests
     public class Given_a_Generator : Specification
     {
         protected IGenerator _generator;
+        protected ICodeWriter _codeWriter;
 
         protected override void Before_each()
         {
             base.Before_each();
 
             _generator = Stub<IGenerator>();
+            _codeWriter = new CodeWriter();
         } 
     }
 
@@ -31,7 +33,8 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("}");
 
             ClassExpression data = new ClassExpression(_generator).WithName("Sample");
-            data.Generate().Output.ToString().ShouldBe(expected.ToString());
+            data.Generate(_codeWriter);
+            _codeWriter.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
@@ -44,7 +47,8 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("}");
 
             ClassExpression data = new ClassExpression(_generator).WithName("Sample").AddPrimaryKeyProperty("PrimaryKey");
-            data.Generate().Output.ToString().ShouldBe(expected.ToString());
+            data.Generate(_codeWriter);
+            _codeWriter.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
@@ -56,41 +60,73 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    public abc Something { get; set; }");
             expected.AppendLineFormat("}");
 
-            ClassExpression data = new ClassExpression(_generator).WithName("Sample").AddProperty("Something").OfType("abc");
-            data.Generate().Output.ToString().ShouldBe(expected.ToString());
+            ClassExpression classExpression = new ClassExpression(_generator);
+            classExpression.WithName("Sample").AddProperty("Something").OfType("abc");
+            classExpression.Generate(_codeWriter);
+            _codeWriter.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
         [ExpectedException(typeof(GenerationException))]
         public void Should_throw_exception_if_the_type_of_a_property_is_not_specified()
         {
-            new ClassExpression(_generator).WithName("Sample").AddProperty("abc").Generate();
+            var classExpression = new ClassExpression(_generator);
+            classExpression.WithName("Sample").AddProperty("abc");
+            classExpression.Generate(_codeWriter);
+        }
+
+        [Test]
+        [ExpectedException(typeof(GenerationException))]
+        public void Should_throw_exception_if_the_name_of_a_property_is_not_specified()
+        {
+            var classExpression = new ClassExpression(_generator);
+            classExpression.WithName("Sample").AddProperty((string) null).OfType("int");
+            classExpression.Generate(_codeWriter);
         }
 
         [Test]
         public void Should_write_out_list_properties()
         {
+            //StringBuilder expected = new StringBuilder();
+            //expected.AppendLineFormat("public class Sample");
+            //expected.AppendLineFormat("{");
+            //expected.AppendLineFormat("    private List<abc> _someList = new List<abc>();");
+            //expected.AppendLineFormat("");
+            //expected.AppendLineFormat("    public IList<abc> SomeList");
+            //expected.AppendLineFormat("    {");
+            //expected.AppendLineFormat("        get { return _someList; }");
+            //expected.AppendLineFormat("        set { _someList = value; }");
+            //expected.AppendLineFormat("    }");
+            //expected.AppendLineFormat("}");
+
             StringBuilder expected = new StringBuilder();
             expected.AppendLineFormat("public class Sample");
             expected.AppendLineFormat("{");
-            expected.AppendLineFormat("    private List<abc> _someList = new List<abc>();");
-            expected.AppendLineFormat("");
-            expected.AppendLineFormat("    public List<abc> SomeList");
-            expected.AppendLineFormat("    {");
-            expected.AppendLineFormat("        get { return _someList; }");
-            expected.AppendLineFormat("        set { _someList = value; }");
-            expected.AppendLineFormat("    }");
+            expected.AppendLineFormat("    public IList<abc> SomeList { get; set; }");
             expected.AppendLineFormat("}");
 
-            ClassExpression data = new ClassExpression(_generator).WithName("Sample").AddListOf("abc").WithName("SomeList");
-            data.Generate().Output.ToString().ShouldBe(expected.ToString());
+            ClassExpression classExpression = new ClassExpression(_generator);
+            classExpression.WithName("Sample").AddListOf("abc").WithName("SomeList");
+            classExpression.Generate(_codeWriter);
+            _codeWriter.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
         [ExpectedException(typeof(GenerationException))]
         public void Should_throw_exception_if_the_name_of_a_list_is_not_specified()
         {
-            new ClassExpression(_generator).WithName("Sample").AddListOf("abc").Generate();
+            var classExpression = new ClassExpression(_generator);
+            classExpression.WithName("Sample").AddListOf("abc");
+            classExpression.Generate(_codeWriter);
+        }
+
+        [Test]
+        [ExpectedException(typeof(GenerationException))]
+        public void Should_throw_exception_if_the_type_of_a_list_is_not_specified()
+        {
+            var classExpression = new ClassExpression(_generator);
+            classExpression.WithName("Sample").AddListOf(null).Of("int");
+            classExpression.Generate(_codeWriter);
         }
     }
 
@@ -120,7 +156,8 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("}");
 
             ClassExpression data = new ClassExpression(_generator).WithName("Sample").WithPropertyChanging();
-            data.Generate().Output.ToString().ShouldBe(expected.ToString());
+            data.Generate(_codeWriter);
+            _codeWriter.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
@@ -164,7 +201,8 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("}");
 
             ClassExpression data = new ClassExpression(_generator).WithName("Sample").WithPropertyChanging();
-            data.Generate().Output.ToString().ShouldBe(expected.ToString());
+            data.Generate(_codeWriter);
+            _codeWriter.ToString().ShouldBe(expected.ToString());
         }
     }
 
@@ -194,7 +232,8 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("}");
 
             ClassExpression data = new ClassExpression(_generator).WithName("Sample").WithPropertyChanged();
-            data.Generate().Output.ToString().ShouldBe(expected.ToString());
+            data.Generate(_codeWriter);
+            _codeWriter.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
@@ -238,7 +277,8 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("}");
 
             ClassExpression data = new ClassExpression(_generator).WithName("Sample").WithPropertyChanged().AddProperty("Something").OfType("string");
-            data.Generate().Output.ToString().ShouldBe(expected.ToString());
+            data.Generate(_codeWriter);
+            _codeWriter.ToString().ShouldBe(expected.ToString());
         }
     }
 
@@ -283,7 +323,8 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("}");
 
             ClassExpression data = new ClassExpression(_generator).WithName("Sample").WithPropertyChanging().WithPropertyChanged();
-            data.Generate().Output.ToString().ShouldBe(expected.ToString());
+            data.Generate(_codeWriter);
+            _codeWriter.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
@@ -342,7 +383,8 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("}");
 
             ClassExpression data = new ClassExpression(_generator).WithName("Sample").WithPropertyChanging().WithPropertyChanged().AddProperty("Something").OfType("string");
-            data.Generate().Output.ToString().ShouldBe(expected.ToString());
+            data.Generate(_codeWriter);
+            _codeWriter.ToString().ShouldBe(expected.ToString());
         }
     }
 

@@ -15,23 +15,31 @@ namespace FluentGenerator
             _parent = parent;
         }
 
-        public override IGenerationOutput Generate()
+        public override void Generate(ICodeWriter codeWriter)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine(ExtractBackingFieldExpression().Generate().Output.ToString());
-            sb.AppendLine();
-            sb.AppendLine(GeneratePropertyOnly());
-            return new GenerationOutput(sb.ToString());
+            var backingField = ExtractBackingFieldExpression();
+            if (backingField != null)
+            {
+                backingField.Generate(codeWriter);
+                codeWriter.AppendLine();
+            }
+            GeneratePropertyOnly(codeWriter);
         }
 
         public virtual IFieldExpression ExtractBackingFieldExpression()
         {
-            return new FieldExpression(Generator).OfType(_type).WithName(_name);
+            return null;
+            //return new FieldExpression(Generator).OfType(_type).WithName(_name);
         }
 
-        public virtual string GeneratePropertyOnly()
+        public virtual void GeneratePropertyOnly(ICodeWriter codeWriter)
         {
-            return string.Format("public {0} {1} {{ get; set; }}", _type, _name);
+            if (_type == null)
+                throw new GenerationException(string.Format("Property type was not set (property name = {0}).", _name));
+            if (_name == null)
+                throw new GenerationException(string.Format("Property name was not set (property type = {0}).", _type));
+
+            codeWriter.AppendLineFormat("public {0} {1} {{ get; set; }}", _type, _name);
         }
 
         public new PropertyExpression WithName(string name)
