@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using FluentGenerator.Service;
 using StructureMap;
+using System.Text;
 
 namespace FluentGenerator
 {
@@ -47,12 +48,14 @@ namespace FluentGenerator
 
         public virtual void GenerateFile()
         {
+            StringBuilder output = new StringBuilder();
             foreach (var item in GeneratableItems)
             {
                 CodeWriter codeWriter = new CodeWriter();
                 item.Generate(codeWriter);
-                _fileSystemService.WriteToFile(Path, codeWriter.ToString());
+                output.AppendLine(codeWriter.ToString());
             }
+            _fileSystemService.WriteToFile(Path, output.ToString());
         }
 
         public void Dispose()

@@ -31,6 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External Assemblies\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=2.5.0.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External Assemblies\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -45,10 +53,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Runner.cs" />
     <Compile Include="SampleGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FluentGenerator.Tests\FluentGenerator.Tests.csproj">
+      <Project>{1C7F0C8B-D860-4A12-B4D8-9E2C7E337D4C}</Project>
+      <Name>FluentGenerator.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FluentGenerator\FluentGenerator.csproj">
       <Project>{CBFAD952-8C87-41D0-B23A-501BBAB39BA5}</Project>
       <Name>FluentGenerator</Name>

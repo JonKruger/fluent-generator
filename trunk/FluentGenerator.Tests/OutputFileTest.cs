@@ -52,7 +52,7 @@ namespace FluentGenerator.Tests
         {
             base.Before_each();
 
-            _generator = Partial<Generator>(Stub<IFileSystemService>(), Stub<ICodeWriter>());
+            _generator = Partial<Generator>(Stub<IFileSystemService>());
             _generator.Stub(g => g.GenerateFile(null)).IgnoreArguments();
 
             ReplayAll();

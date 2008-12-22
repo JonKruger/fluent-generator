@@ -16,25 +16,23 @@ namespace FluentGenerator.Tests
         private Generator _generator;
         private IFileSystemService _fileSystemService;
         private OutputFile _outputFile;
-        private CodeWriter _codeWriter;
 
         protected override void Before_each()
         {
             base.Before_each();
 
-            _codeWriter = new CodeWriter();
             _generatable1 = Mock<IGeneratable>();
             _generatable2 = Mock<IGeneratable>();
             _fileSystemService = Mock<IFileSystemService>();
 
-            _generatable1.Stub(g => g.Generate(_codeWriter)).WhenCalled(method => ((ICodeWriter)method.Arguments[0]).AppendLine("value1"));
-            _generatable2.Stub(g => g.Generate(_codeWriter)).WhenCalled(method => ((ICodeWriter)method.Arguments[0]).AppendLine("value2")); 
+            _generatable1.Stub(g => g.Generate(null)).IgnoreArguments().WhenCalled(method => ((ICodeWriter)method.Arguments[0]).AppendLine("value1"));
+            _generatable2.Stub(g => g.Generate(null)).IgnoreArguments().WhenCalled(method => ((ICodeWriter)method.Arguments[0]).AppendLine("value2")); 
 
             _outputFile = new OutputFile(@"c:\path.txt", _fileSystemService);
             _outputFile.AddGeneratableItem(_generatable1);
             _outputFile.AddGeneratableItem(_generatable2);
 
-            _generator = Partial<Generator>(_fileSystemService, _codeWriter);
+            _generator = Partial<Generator>(_fileSystemService);
             ReplayAll();
 
             _generator.GenerateFile(_outputFile);
@@ -50,15 +48,14 @@ namespace FluentGenerator.Tests
         [Test]
         public void Should_generate_each_item_in_the_OutputFile()
         {
-            _generatable1.AssertWasCalled(g => g.Generate(_codeWriter));
-            _generatable2.AssertWasCalled(g => g.Generate(_codeWriter));
+            _generatable1.AssertWasCalled(g => g.Generate(null), o => o.IgnoreArguments());
+            _generatable2.AssertWasCalled(g => g.Generate(null), o => o.IgnoreArguments());
         }
         
         [Test]
         public void Should_write_the_result_out_to_a_file()
         {
-            _fileSystemService.AssertWasCalled(fss => fss.WriteToFile(@"c:\path.txt", "value1"));
-            _fileSystemService.AssertWasCalled(fss => fss.WriteToFile(@"c:\path.txt", "value2"));
+            _fileSystemService.AssertWasCalled(fss => fss.WriteToFile(@"c:\path.txt", "value1\r\n\r\nvalue2\r\n\r\n"));
         }
     }
 }
