@@ -22,15 +22,13 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("}");
             expected.AppendLine();
 
-            OpenNamespaceExpression nsData = new OpenNamespaceExpression(_generator).WithName("Sample.Namespace");
-            nsData.Generate(_codeWriter);
+            NamespaceExpression nsData = new NamespaceExpression(_generator).WithName("Sample.Namespace");
 
             ClassExpression data = new ClassExpression(_generator).WithName("Sample");
-            data.Generate(_codeWriter);
+            nsData.GeneratableItems.Add(data);
 
-            CloseNamespaceExpression closeData = new CloseNamespaceExpression(_generator);
-            closeData.Generate(_codeWriter);
-            
+            nsData.Generate(_codeWriter);
+
             _codeWriter.ToString().ShouldBe(expected.ToString());
         }
     }

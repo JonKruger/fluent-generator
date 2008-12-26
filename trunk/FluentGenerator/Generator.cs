@@ -11,14 +11,14 @@ namespace FluentGenerator
     {
         private static IGenerator _current;
         private IFileSystemService _fileSystemService;
-        private IOpenNamespaceExpression _currentNamespace;
+        private INamespaceExpression _currentNamespace;
 
         public static IGenerator Current
         {
             get { return _current; }
         }
 
-        public IOpenNamespaceExpression CurrentNamespace { get; set; }
+        public INamespaceExpression CurrentNamespace { get; set; }
 
         public Generator(IFileSystemService fileSystemService) 
         {
@@ -47,7 +47,10 @@ namespace FluentGenerator
         public ClassExpression CreateClass(string className)
         {
             ClassExpression classData = new ClassExpression(this);
-            OutputFile.Current.AddGeneratableItem(classData);
+            if (_currentNamespace != null)
+                _currentNamespace.GeneratableItems.Add(classData);
+            else
+                OutputFile.Current.AddGeneratableItem(classData);
 
             if (!string.IsNullOrEmpty(className))
                 classData.WithName(className);
@@ -56,9 +59,7 @@ namespace FluentGenerator
 
         public void Namespace(string ns)
         {
-            if (_currentNamespace != null)
-                OutputFile.Current.AddGeneratableItem(new CloseNamespaceExpression(this));
-            _currentNamespace = new OpenNamespaceExpression(this).WithName(ns);
+            _currentNamespace = new NamespaceExpression(this).WithName(ns);
             OutputFile.Current.AddGeneratableItem(_currentNamespace);
         }
     }
