@@ -54,10 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassExpressionTest.cs" />
-    <Compile Include="CodeWriterTests.cs" />
+    <Compile Include="CodeWriterTest.cs" />
     <Compile Include="Extensions\StringArrayExtensionTest.cs" />
     <Compile Include="Extensions\StringExtensionTest.cs" />
     <Compile Include="GeneratorTest.cs" />
+    <Compile Include="NamespaceExpressionTest.cs" />
     <Compile Include="OutputFileTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Specification.cs" />

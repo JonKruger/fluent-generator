@@ -17,6 +17,8 @@ namespace FluentGenerator.Example
         {
             using (new OutputFile(@"c:\temp\Driver.cs"))
             {
+                Namespace("TestNamespace");
+
                 CreateClass("Driver")
                     .AddProperty("Name").OfType("string")
                     .AddProperty("Address").OfType("string")
@@ -26,6 +28,5 @@ namespace FluentGenerator.Example
                     .FromDatabaseTable("Trucks");
             }
         }
-
     }
 }
