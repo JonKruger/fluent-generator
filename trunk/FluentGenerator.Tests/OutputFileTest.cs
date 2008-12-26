@@ -81,4 +81,46 @@ namespace FluentGenerator.Tests
             OutputFile.Current.ShouldBeNull();
         }
     }
+
+    [TestFixture]
+    public class When_generating_an_OutputFile : Specification
+    {
+        private IFileSystemService _fileSystemService;
+        private Generator _generator;
+
+        protected override void Before_each()
+        {
+            base.Before_each();
+            _fileSystemService = Stub<IFileSystemService>();
+            _generator = Partial<Generator>(_fileSystemService);
+        }
+
+        [Test]
+        public void Should_put_two_classes_inside_the_same_namespace_declaration_if_they_share_a_namespace()
+        {
+            //StringBuilder expected
+
+            //using (new OutputFile("asdf", _fileSystemService))
+            //{
+            //    OutputFile.Current.SetNamespace("test");
+
+            //    OutputFile.Current.AddGeneratableItem(new ClassExpression(_generator).WithName("class1"));
+            //    OutputFile.Current.AddGeneratableItem(new ClassExpression(_generator).WithName("class2"));
+            //}
+
+            //_fileSystemService.AssertWasCalled(fss => fss.WriteToFile("asdf", data));
+        }
+
+        [Test]
+        public void Should_put_two_classes_inside_separate_namespace_declarations_if_they_do_not_share_a_namespace()
+        {
+            
+        }
+
+        [Test]
+        public void Should_group_classes_based_on_when_the_namespace_is_set()
+        {
+            
+        }
+    }
 }
