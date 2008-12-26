@@ -39,12 +39,12 @@ namespace FluentGenerator
             file.GenerateFile();
         }
 
-        protected ClassExpression CreateClass()
+        public ClassExpression CreateClass()
         {
             return CreateClass(null);
         }
 
-        protected ClassExpression CreateClass(string className)
+        public ClassExpression CreateClass(string className)
         {
             ClassExpression classData = new ClassExpression(this);
             OutputFile.Current.AddGeneratableItem(classData);
@@ -54,7 +54,7 @@ namespace FluentGenerator
             return classData;
         }
 
-        protected void Namespace(string ns)
+        public void Namespace(string ns)
         {
             if (_currentNamespace != null)
                 OutputFile.Current.AddGeneratableItem(new CloseNamespaceExpression(this));
