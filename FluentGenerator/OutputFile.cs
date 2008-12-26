@@ -48,14 +48,12 @@ namespace FluentGenerator
 
         public virtual void GenerateFile()
         {
-            StringBuilder output = new StringBuilder();
+            CodeWriter codeWriter = new CodeWriter();
             foreach (var item in GeneratableItems)
             {
-                CodeWriter codeWriter = new CodeWriter();
                 item.Generate(codeWriter);
-                output.AppendLine(codeWriter.ToString());
             }
-            _fileSystemService.WriteToFile(Path, output.ToString());
+            _fileSystemService.WriteToFile(Path, codeWriter.ToString());
         }
 
         public void Dispose()
