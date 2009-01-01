@@ -1,6 +1,8 @@
+using FluentGenerator.Generators;
+
 namespace FluentGenerator
 {
-    public interface IClassExpression : IGeneratable
+    public interface IClassExpression : IExpression<IClassGenerator>
     {
         
     }

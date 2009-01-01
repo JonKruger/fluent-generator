@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FluentGenerator
+namespace FluentGenerator.Generators
 {
-    public class PropertyExpressionCollection : List<IPropertyExpression>, IPropertyExpressionCollection
+    public class PropertyGeneratorCollection : List<IPropertyGenerator>, IGeneratable
     {
         public void Generate(ICodeWriter codeWriter)
         {
-            List<IFieldExpression> backingFields = new List<IFieldExpression>();
+            List<IFieldGenerator> backingFields = new List<IFieldGenerator>();
             foreach (var propertyExpression in this)
             {
                 var backingField = propertyExpression.ExtractBackingFieldExpression();
@@ -21,7 +21,7 @@ namespace FluentGenerator
 
             if (backingFields.Count > 0)
                 codeWriter.AppendLine();
-            
+
             foreach (var propertyExpression in this)
                 propertyExpression.GeneratePropertyOnly(codeWriter);
         }

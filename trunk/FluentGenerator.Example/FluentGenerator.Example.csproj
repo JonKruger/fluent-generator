@@ -58,6 +58,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FluentGenerator.Expressions\FluentGenerator.Expressions.csproj">
+      <Project>{B5210459-1D52-46F5-BF24-7FB1A493F8C6}</Project>
+      <Name>FluentGenerator.Expressions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FluentGenerator.Tests\FluentGenerator.Tests.csproj">
       <Project>{1C7F0C8B-D860-4A12-B4D8-9E2C7E337D4C}</Project>
       <Name>FluentGenerator.Tests</Name>

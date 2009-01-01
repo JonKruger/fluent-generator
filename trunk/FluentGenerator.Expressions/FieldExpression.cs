@@ -2,33 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FluentGenerator.Generators;
 using FluentGenerator.Extensions;
 
-namespace FluentGenerator
+namespace FluentGenerator.Expressions
 {
     public class FieldExpression : ClassExpression, IFieldExpression
     {
-        private string _name;
-        private string _type;
+        private IFieldGenerator _generator = new FieldGenerator();
 
-        public FieldExpression(IGenerator generator) : base(generator)
+        public IFieldGenerator Generator
         {
-        }
-
-        public override void Generate(ICodeWriter codeWriter)
-        {
-            codeWriter.AppendLineFormat("public {0} {1};", _type, _name.ToCamelCaseUnderscore());
+            get { return _generator; }
         }
 
         public new FieldExpression WithName(string name)
         {
-            _name = name;
+            _generator.Name = name;
             return this;
         }
 
         public FieldExpression OfType(string type)
         {
-            _type = type;
+            _generator.Type = type;
             return this;
         }
     }

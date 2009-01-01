@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,14 +45,14 @@ namespace FluentGenerator.Tests
     [TestFixture]
     public class When_disposing_an_OutputFile : Specification
     {
-        private Generator _generator;
+        private GeneratorBase _generator;
         private OutputFile _outputFile;
 
         protected override void Before_each()
         {
             base.Before_each();
 
-            _generator = Partial<Generator>(Stub<IFileSystemService>());
+            _generator = Partial<GeneratorBase>(Stub<IGeneratorFactory>(), Stub<IFileSystemService>());
             _generator.Stub(g => g.GenerateFile(null)).IgnoreArguments();
 
             ReplayAll();
@@ -86,13 +86,13 @@ namespace FluentGenerator.Tests
     public class When_generating_an_OutputFile : Specification
     {
         private IFileSystemService _fileSystemService;
-        private Generator _generator;
+        private GeneratorBase _generator;
 
         protected override void Before_each()
         {
             base.Before_each();
             _fileSystemService = Stub<IFileSystemService>();
-            _generator = Partial<Generator>(_fileSystemService);
+            _generator = Partial<GeneratorBase>(Stub<IGeneratorFactory>(), _fileSystemService);
         }
 
         [Test]

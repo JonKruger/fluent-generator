@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FluentGenerator.Expressions;
 using StructureMap;
 
 namespace FluentGenerator.Example
@@ -24,8 +25,8 @@ namespace FluentGenerator.Example
                     .AddProperty("Address").OfType("string")
                     .AddListOf("Truck").WithName("Trucks");
 
-                CreateClass("Truck")
-                    .FromDatabaseTable("Trucks");
+                //CreateClass("Truck")
+                //    .FromDatabaseTable("Trucks");
             }
         }
     }

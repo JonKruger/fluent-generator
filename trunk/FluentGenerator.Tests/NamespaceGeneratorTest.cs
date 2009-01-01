@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FluentGenerator.Extensions;
+using FluentGenerator.Generators;
 using NUnit.Framework;
 
 namespace FluentGenerator.Tests
@@ -22,12 +23,10 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("}");
             expected.AppendLine();
 
-            NamespaceExpression nsData = new NamespaceExpression(_generator).WithName("Sample.Namespace");
-
-            ClassExpression data = new ClassExpression(_generator).WithName("Sample");
-            nsData.GeneratableItems.Add(data);
-
-            nsData.Generate(_codeWriter);
+            NamespaceGenerator ns = new NamespaceGenerator {Name = "Sample.Namespace"};
+            ClassGenerator c = new ClassGenerator {Name = "Sample"};
+            ns.GeneratableItems.Add(c);
+            ns.Generate(_codeWriter);
 
             _codeWriter.ToString().ShouldBe(expected.ToString());
         }

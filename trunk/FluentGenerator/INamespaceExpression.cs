@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using FluentGenerator.Generators;
 
 namespace FluentGenerator
 {
-    public interface INamespaceExpression : IGeneratable
+    public interface INamespaceExpression : IExpression<INamespaceGenerator>
     {
-        List<IGeneratable> GeneratableItems { get; }
+        void AddGeneratableItem(IGeneratable item);
     }
 }

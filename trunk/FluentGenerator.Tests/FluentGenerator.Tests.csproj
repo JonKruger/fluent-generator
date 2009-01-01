@@ -57,8 +57,10 @@
     <Compile Include="CodeWriterTest.cs" />
     <Compile Include="Extensions\StringArrayExtensionTest.cs" />
     <Compile Include="Extensions\StringExtensionTest.cs" />
+    <Compile Include="GeneratorFactoryTest.cs" />
     <Compile Include="GeneratorTest.cs" />
-    <Compile Include="NamespaceExpressionTest.cs" />
+    <Compile Include="MethodGeneratorTest.cs" />
+    <Compile Include="NamespaceGeneratorTest.cs" />
     <Compile Include="OutputFileTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Specification.cs" />

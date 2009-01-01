@@ -14,6 +14,7 @@ namespace FluentGenerator
 
             ForRequestedType<IFileSystemService>().TheDefaultIsConcreteType<FileSystemService>();
             ForRequestedType<ICodeWriter>().TheDefaultIsConcreteType<CodeWriter>();
+            ForRequestedType<IGeneratorFactory>().TheDefaultIsConcreteType<GeneratorFactory>();
         }
     }
 }

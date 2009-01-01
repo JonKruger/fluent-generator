@@ -58,7 +58,7 @@ namespace FluentGenerator
 
         public void Dispose()
         {
-            Generator.Current.GenerateFile(this);
+            GeneratorBase.Current.GenerateFile(this);
             _current = null;
         }
     }
