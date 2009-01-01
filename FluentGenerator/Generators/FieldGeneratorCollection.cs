@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FluentGenerator
+namespace FluentGenerator.Generators
 {
-    public class FieldExpressionCollection : List<IFieldExpression>, IFieldExpressionCollection
+    public class FieldGeneratorCollection : List<IFieldGenerator>, IGeneratable
     {
         public void Generate(ICodeWriter codeWriter)
         {

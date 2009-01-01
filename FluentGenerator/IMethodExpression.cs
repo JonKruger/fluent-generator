@@ -1,6 +1,8 @@
+using FluentGenerator.Generators;
+
 namespace FluentGenerator
 {
-    public interface IMethodExpression : IGeneratable
+    public interface IMethodExpression : IExpression<IMethodGenerator>
     {
     }
 }

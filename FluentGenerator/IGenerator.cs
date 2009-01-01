@@ -4,6 +4,5 @@ namespace FluentGenerator
     {
         void Generate();
         void GenerateFile(OutputFile file);
-        INamespaceExpression CurrentNamespace { get; set; }
     }
 }

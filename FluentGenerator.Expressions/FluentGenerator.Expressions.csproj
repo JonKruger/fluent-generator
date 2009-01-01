@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1C7F0C8B-D860-4A12-B4D8-9E2C7E337D4C}</ProjectGuid>
+    <ProjectGuid>{B5210459-1D52-46F5-BF24-7FB1A493F8C6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FluentGenerator.Tests</RootNamespace>
-    <AssemblyName>FluentGenerator.Tests</AssemblyName>
+    <RootNamespace>FluentGenerator.Expressions</RootNamespace>
+    <AssemblyName>FluentGenerator.Expressions</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,14 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\External Assemblies\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\External Assemblies\Rhino.Mocks.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -53,18 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassExpressionTest.cs" />
-    <Compile Include="CodeWriterTest.cs" />
-    <Compile Include="Extensions\StringArrayExtensionTest.cs" />
-    <Compile Include="Extensions\StringExtensionTest.cs" />
-    <Compile Include="GeneratorFactoryTest.cs" />
-    <Compile Include="GeneratorTest.cs" />
-    <Compile Include="MethodGeneratorTest.cs" />
-    <Compile Include="NamespaceGeneratorTest.cs" />
-    <Compile Include="OutputFileTest.cs" />
+    <Compile Include="ClassExpression.cs" />
+    <Compile Include="FieldExpression.cs" />
+    <Compile Include="Generator.cs" />
+    <Compile Include="ListExpression.cs" />
+    <Compile Include="MethodExpression.cs" />
+    <Compile Include="NamespaceExpression.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Specification.cs" />
-    <Compile Include="TestExtension.cs" />
+    <Compile Include="PropertyExpression.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FluentGenerator\FluentGenerator.csproj">

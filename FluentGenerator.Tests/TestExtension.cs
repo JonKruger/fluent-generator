@@ -294,5 +294,10 @@ namespace FluentGenerator.Tests
                 orderedEnumerator.Current.ShouldBeTheSameAs(enumerator.Current, "The list was not in the correct order.");
             }
         }
+
+        public static void ShouldBeOfType<T>(this object actual)
+        {
+            Assert.IsInstanceOfType(typeof(T), actual);
+        }
     }
 }

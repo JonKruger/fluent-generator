@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FluentGenerator.Extensions;
+using FluentGenerator.Generators;
 using NUnit.Framework;
 
 namespace FluentGenerator.Tests
@@ -32,102 +33,172 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("{");
             expected.AppendLineFormat("}");
 
-            ClassExpression data = new ClassExpression(_generator).WithName("Sample");
+            ClassGenerator data = new ClassGenerator {Name = "Sample"};
             data.Generate(_codeWriter);
             _codeWriter.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
-        public void Should_write_the_primary_key_property()
+        public void Should_write_out_the_properties()
         {
             StringBuilder expected = new StringBuilder();
             expected.AppendLineFormat("public class Sample");
             expected.AppendLineFormat("{");
-            expected.AppendLineFormat("    public int PrimaryKey { get; set; }");
+            expected.AppendLineFormat("    public string Property { get; set; }");
             expected.AppendLineFormat("}");
 
-            ClassExpression data = new ClassExpression(_generator).WithName("Sample").AddPrimaryKeyProperty("PrimaryKey");
+            ClassGenerator data = new ClassGenerator { Name = "Sample" };
+            data.Properties.Add(new PropertyGenerator {Name = "Property", Type = "string"});
             data.Generate(_codeWriter);
             _codeWriter.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
-        public void Should_write_out_properties_when_the_type_is_specified_as_a_string()
+        public void Should_write_out_the_fields()
         {
             StringBuilder expected = new StringBuilder();
             expected.AppendLineFormat("public class Sample");
             expected.AppendLineFormat("{");
-            expected.AppendLineFormat("    public abc Something { get; set; }");
+            expected.AppendLineFormat("    public string _field;");
             expected.AppendLineFormat("}");
 
-            ClassExpression classExpression = new ClassExpression(_generator);
-            classExpression.WithName("Sample").AddProperty("Something").OfType("abc");
-            classExpression.Generate(_codeWriter);
+            ClassGenerator data = new ClassGenerator { Name = "Sample" };
+            data.Fields.Add(new FieldGenerator() { Name = "_field", Type = "string" });
+            data.Generate(_codeWriter);
             _codeWriter.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
-        [ExpectedException(typeof(GenerationException))]
-        public void Should_throw_exception_if_the_type_of_a_property_is_not_specified()
+        public void Should_write_out_the_methods()
         {
-            var classExpression = new ClassExpression(_generator);
-            classExpression.WithName("Sample").AddProperty("abc");
-            classExpression.Generate(_codeWriter);
-        }
-
-        [Test]
-        [ExpectedException(typeof(GenerationException))]
-        public void Should_throw_exception_if_the_name_of_a_property_is_not_specified()
-        {
-            var classExpression = new ClassExpression(_generator);
-            classExpression.WithName("Sample").AddProperty((string) null).OfType("int");
-            classExpression.Generate(_codeWriter);
-        }
-
-        [Test]
-        public void Should_write_out_list_properties()
-        {
-            //StringBuilder expected = new StringBuilder();
-            //expected.AppendLineFormat("public class Sample");
-            //expected.AppendLineFormat("{");
-            //expected.AppendLineFormat("    private List<abc> _someList = new List<abc>();");
-            //expected.AppendLineFormat("");
-            //expected.AppendLineFormat("    public IList<abc> SomeList");
-            //expected.AppendLineFormat("    {");
-            //expected.AppendLineFormat("        get { return _someList; }");
-            //expected.AppendLineFormat("        set { _someList = value; }");
-            //expected.AppendLineFormat("    }");
-            //expected.AppendLineFormat("}");
-
             StringBuilder expected = new StringBuilder();
             expected.AppendLineFormat("public class Sample");
             expected.AppendLineFormat("{");
-            expected.AppendLineFormat("    public IList<abc> SomeList { get; set; }");
+            expected.AppendLineFormat("    public string Method()");
+            expected.AppendLineFormat("    {");
+            expected.AppendLineFormat("    }");
             expected.AppendLineFormat("}");
 
-            ClassExpression classExpression = new ClassExpression(_generator);
-            classExpression.WithName("Sample").AddListOf("abc").WithName("SomeList");
-            classExpression.Generate(_codeWriter);
+            ClassGenerator data = new ClassGenerator { Name = "Sample" };
+            data.Methods.Add(new MethodGenerator() { Name = "Method", ReturnType = "string" });
+            data.Generate(_codeWriter);
             _codeWriter.ToString().ShouldBe(expected.ToString());
         }
 
         [Test]
-        [ExpectedException(typeof(GenerationException))]
-        public void Should_throw_exception_if_the_name_of_a_list_is_not_specified()
+        public void Should_write_out_fields_then_properties_then_methods()
         {
-            var classExpression = new ClassExpression(_generator);
-            classExpression.WithName("Sample").AddListOf("abc");
-            classExpression.Generate(_codeWriter);
+            StringBuilder expected = new StringBuilder();
+            expected.AppendLine("public class Sample");
+            expected.AppendLine("{");
+            expected.AppendLine("    public string _field;");
+            expected.AppendLine("    ");
+            expected.AppendLine("    public string Property { get; set; }");
+            expected.AppendLine("    ");
+            expected.AppendLine("    public string Method()");
+            expected.AppendLine("    {");
+            expected.AppendLine("    }");
+            expected.AppendLine("}");
+
+            ClassGenerator data = new ClassGenerator { Name = "Sample" };
+            data.Methods.Add(new MethodGenerator() { Name = "Method", ReturnType = "string" });
+            data.Fields.Add(new FieldGenerator() { Name = "_field", Type = "string" });
+            data.Properties.Add(new PropertyGenerator { Name = "Property", Type = "string" });
+            data.Generate(_codeWriter);
+            _codeWriter.ToString().ShouldBe(expected.ToString());
         }
 
-        [Test]
-        [ExpectedException(typeof(GenerationException))]
-        public void Should_throw_exception_if_the_type_of_a_list_is_not_specified()
-        {
-            var classExpression = new ClassExpression(_generator);
-            classExpression.WithName("Sample").AddListOf(null).Of("int");
-            classExpression.Generate(_codeWriter);
-        }
+        //[Test]
+        //public void Should_write_the_primary_key_property()
+        //{
+        //    StringBuilder expected = new StringBuilder();
+        //    expected.AppendLineFormat("public class Sample");
+        //    expected.AppendLineFormat("{");
+        //    expected.AppendLineFormat("    public int PrimaryKey { get; set; }");
+        //    expected.AppendLineFormat("}");
+
+        //    ClassGenerator data = new ClassGenerator { Name = "Sample" };
+        //    data.Generate(_codeWriter);
+        //    _codeWriter.ToString().ShouldBe(expected.ToString());
+        //}
+
+        //[Test]
+        //public void Should_write_out_properties_when_the_type_is_specified_as_a_string()
+        //{
+        //    StringBuilder expected = new StringBuilder();
+        //    expected.AppendLineFormat("public class Sample");
+        //    expected.AppendLineFormat("{");
+        //    expected.AppendLineFormat("    public abc Something { get; set; }");
+        //    expected.AppendLineFormat("}");
+
+        //    ClassExpression classExpression = new ClassExpression(_generator);
+        //    classExpression.WithName("Sample").AddProperty("Something").OfType("abc");
+        //    classExpression.Generate(_codeWriter);
+        //    _codeWriter.ToString().ShouldBe(expected.ToString());
+        //}
+
+        //[Test]
+        //[ExpectedException(typeof(GenerationException))]
+        //public void Should_throw_exception_if_the_type_of_a_property_is_not_specified()
+        //{
+        //    var classExpression = new ClassExpression(_generator);
+        //    classExpression.WithName("Sample").AddProperty("abc");
+        //    classExpression.Generate(_codeWriter);
+        //}
+
+        //[Test]
+        //[ExpectedException(typeof(GenerationException))]
+        //public void Should_throw_exception_if_the_name_of_a_property_is_not_specified()
+        //{
+        //    var classExpression = new ClassExpression(_generator);
+        //    classExpression.WithName("Sample").AddProperty((string) null).OfType("int");
+        //    classExpression.Generate(_codeWriter);
+        //}
+
+        //[Test]
+        //public void Should_write_out_list_properties()
+        //{
+        //    //StringBuilder expected = new StringBuilder();
+        //    //expected.AppendLineFormat("public class Sample");
+        //    //expected.AppendLineFormat("{");
+        //    //expected.AppendLineFormat("    private List<abc> _someList = new List<abc>();");
+        //    //expected.AppendLineFormat("");
+        //    //expected.AppendLineFormat("    public IList<abc> SomeList");
+        //    //expected.AppendLineFormat("    {");
+        //    //expected.AppendLineFormat("        get { return _someList; }");
+        //    //expected.AppendLineFormat("        set { _someList = value; }");
+        //    //expected.AppendLineFormat("    }");
+        //    //expected.AppendLineFormat("}");
+
+        //    StringBuilder expected = new StringBuilder();
+        //    expected.AppendLineFormat("public class Sample");
+        //    expected.AppendLineFormat("{");
+        //    expected.AppendLineFormat("    public IList<abc> SomeList { get; set; }");
+        //    expected.AppendLineFormat("}");
+
+        //    ClassExpression classExpression = new ClassExpression(_generator);
+        //    classExpression.WithName("Sample").AddListOf("abc").WithName("SomeList");
+        //    classExpression.Generate(_codeWriter);
+        //    _codeWriter.ToString().ShouldBe(expected.ToString());
+        //}
+
+        //[Test]
+        //[ExpectedException(typeof(GenerationException))]
+        //public void Should_throw_exception_if_the_name_of_a_list_is_not_specified()
+        //{
+        //    var classExpression = new ClassExpression(_generator);
+        //    classExpression.WithName("Sample").AddListOf("abc");
+        //    classExpression.Generate(_codeWriter);
+        //}
+
+        //[Test]
+        //[ExpectedException(typeof(GenerationException))]
+        //public void Should_throw_exception_if_the_type_of_a_list_is_not_specified()
+        //{
+        //    var classExpression = new ClassExpression(_generator);
+        //    classExpression.WithName("Sample").AddListOf(null).Of("int");
+        //    classExpression.Generate(_codeWriter);
+        //}
     }
 
     //[TestFixture]
