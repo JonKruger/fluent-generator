@@ -59,9 +59,12 @@
     <Compile Include="Generators\FieldGeneratorCollection.cs" />
     <Compile Include="Generators\IClassGenerator.cs" />
     <Compile Include="Generators\IFieldGenerator.cs" />
+    <Compile Include="Generators\IFieldGeneratorCollection.cs" />
     <Compile Include="Generators\IMethodGenerator.cs" />
+    <Compile Include="Generators\IMethodGeneratorCollection.cs" />
     <Compile Include="Generators\INamespaceGenerator.cs" />
     <Compile Include="Generators\IPropertyGenerator.cs" />
+    <Compile Include="Generators\IPropertyGeneratorCollection.cs" />
     <Compile Include="Generators\MethodGenerator.cs" />
     <Compile Include="Generators\MethodGeneratorCollection.cs" />
     <Compile Include="Generators\NamespaceGenerator.cs" />

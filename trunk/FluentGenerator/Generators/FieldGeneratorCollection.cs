@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FluentGenerator.Generators
 {
-    public class FieldGeneratorCollection : List<IFieldGenerator>, IGeneratable
+    public class FieldGeneratorCollection : List<IFieldGenerator>, IFieldGeneratorCollection
     {
         public void Generate(ICodeWriter codeWriter)
         {
