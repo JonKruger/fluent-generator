@@ -8,22 +8,20 @@ using NUnit.Framework;
 
 namespace FluentGenerator.Tests
 {
-    public class Given_a_Generator : Specification
+    public class Given_a_CodeWriter : Specification
     {
-        protected IGenerator _generator;
         protected ICodeWriter _codeWriter;
 
         protected override void Before_each()
         {
             base.Before_each();
 
-            _generator = Stub<IGenerator>();
             _codeWriter = new CodeWriter();
         } 
     }
 
     [TestFixture]
-    public class When_generating_a_class : Given_a_Generator
+    public class When_generating_a_class : Given_a_CodeWriter
     {
         [Test]
         public void Should_write_out_the_class_name()
@@ -202,7 +200,7 @@ namespace FluentGenerator.Tests
     }
 
     //[TestFixture]
-    //public class When_generating_a_class_that_implements_INotifyPropertyChanging : Given_a_Generator
+    //public class When_generating_a_class_that_implements_INotifyPropertyChanging : Given_a_CodeWriter
     //{
     //    [Test]
     //    public void Should_implement_INotifyPropertyChanging()
@@ -278,7 +276,7 @@ namespace FluentGenerator.Tests
     //}
 
     //[TestFixture]
-    //public class When_generating_a_class_that_implements_INotifyPropertyChanged : Given_a_Generator
+    //public class When_generating_a_class_that_implements_INotifyPropertyChanged : Given_a_CodeWriter
     //{
     //    [Test]
     //    public void Should_implement_INotifyPropertyChanged()
@@ -354,7 +352,7 @@ namespace FluentGenerator.Tests
     //}
 
     //[TestFixture]
-    //public class When_generating_a_class_that_implements_INotifyPropertyChanging_and_INotifyPropertyChanged : Given_a_Generator
+    //public class When_generating_a_class_that_implements_INotifyPropertyChanging_and_INotifyPropertyChanged : Given_a_CodeWriter
     //{
     //    [Test]
     //    public void Should_implement_INotifyPropertyChanging_and_INotifyPropertyChanged()
