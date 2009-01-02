@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace FluentGenerator.Tests
 {
     [TestFixture]
-    public class When_generating_classes_with_namespaces : Given_a_Generator
+    public class When_generating_classes_with_namespaces : Given_a_CodeWriter
     {
         [Test]
         public void Should_write_out_the_namespace()
