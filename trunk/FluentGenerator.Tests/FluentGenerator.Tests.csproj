@@ -57,6 +57,7 @@
     <Compile Include="CodeWriterTest.cs" />
     <Compile Include="Extensions\StringArrayExtensionTest.cs" />
     <Compile Include="Extensions\StringExtensionTest.cs" />
+    <Compile Include="FieldGeneratorTest.cs" />
     <Compile Include="GeneratorFactoryTest.cs" />
     <Compile Include="GeneratorTest.cs" />
     <Compile Include="MethodGeneratorTest.cs" />
