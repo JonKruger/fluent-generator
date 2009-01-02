@@ -30,9 +30,9 @@ namespace FluentGenerator.Generators
         public virtual void GeneratePropertyOnly(ICodeWriter codeWriter)
         {
             if (Type == null)
-                throw new GenerationException(string.Format("Property type was not set (property name = {0}).", Name));
+                throw new GenerationException(string.Format("Property type was not set (property name = {0}).", Name ?? string.Empty));
             if (Name == null)
-                throw new GenerationException(string.Format("Property name was not set (property type = {0}).", Type));
+                throw new GenerationException(string.Format("Property name was not set (property type = {0}).", Type ?? string.Empty));
 
             codeWriter.AppendLineFormat("public {0} {1} {{ get; set; }}", Type, Name);
         }
