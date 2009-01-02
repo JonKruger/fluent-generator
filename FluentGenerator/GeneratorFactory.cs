@@ -13,6 +13,9 @@ namespace FluentGenerator
         private Type _propertyGeneratorType;
         private Type _fieldGeneratorType;
         private Type _methodGeneratorType;
+        private Type _propertyGeneratorCollectionType;
+        private Type _fieldGeneratorCollectionType;
+        private Type _methodGeneratorCollectionType;
 
         public void ClassGeneratorTypeIs<T>() where T : class, IClassGenerator
         {
@@ -39,6 +42,21 @@ namespace FluentGenerator
             _methodGeneratorType = typeof(T);
         }
 
+        public void PropertyGeneratorCollectionTypeIs<T>() where T : class, IPropertyGeneratorCollection
+        {
+            _propertyGeneratorCollectionType = typeof(T);
+        }
+
+        public void FieldGeneratorCollectionTypeIs<T>() where T : class, IFieldGeneratorCollection
+        {
+            _fieldGeneratorCollectionType = typeof(T);
+        }
+
+        public void MethodGeneratorCollectionTypeIs<T>() where T : class, IMethodGeneratorCollection
+        {
+            _methodGeneratorCollectionType = typeof(T);
+        }
+
         public IClassGenerator CreateClassGenerator()
         {
             return (IClassGenerator) CreateGenerator(_classGeneratorType);
@@ -62,6 +80,21 @@ namespace FluentGenerator
         public IMethodGenerator CreateMethodGenerator()
         {
             return (IMethodGenerator)CreateGenerator(_methodGeneratorType);
+        }
+
+        public IPropertyGeneratorCollection CreatePropertyGeneratorCollection()
+        {
+            return (IPropertyGeneratorCollection)CreateGenerator(_propertyGeneratorCollectionType);
+        }
+
+        public IFieldGeneratorCollection CreateFieldGeneratorCollection()
+        {
+            return (IFieldGeneratorCollection)CreateGenerator(_fieldGeneratorCollectionType);
+        }
+
+        public IMethodGeneratorCollection CreateMethodGeneratorCollection()
+        {
+            return (IMethodGeneratorCollection)CreateGenerator(_methodGeneratorCollectionType);
         }
 
         private IGeneratable CreateGenerator(Type type)

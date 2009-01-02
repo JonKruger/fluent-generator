@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FluentGenerator.Generators
 {
-    public class PropertyGeneratorCollection : List<IPropertyGenerator>, IGeneratable
+    public class PropertyGeneratorCollection : List<IPropertyGenerator>, IPropertyGeneratorCollection
     {
         public void Generate(ICodeWriter codeWriter)
         {

@@ -1,6 +1,6 @@
-﻿- generate methods
+﻿
 - options
-- split generation out of the *Expression classes
-- need an "ExpressionFactory" (so that PropertyExpression does not have to new up FieldExpressions)
 - output file needs a grouping so that i can set open and close ns expressions
 - IGenerator vs. IGeneratable - confusing
+- need more tests in GeneratorFactoryTest.cs
+- generator classes need to use the GeneratorFactory instead of newing things up.
