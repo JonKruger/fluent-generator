@@ -34,7 +34,7 @@ namespace FluentGenerator
         public OutputFile(string path, IFileSystemService fileSystemService)
         {
             if (_current != null)
-                throw new InvalidOperationException("A new OutputFile cannot be created until the previous one has been disposed.");
+                throw new GenerationException("A new OutputFile cannot be created until the previous one has been disposed.");
 
             Path = path;
             _current = this;

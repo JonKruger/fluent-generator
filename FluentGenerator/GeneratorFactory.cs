@@ -67,7 +67,7 @@ namespace FluentGenerator
         private IGeneratable CreateGenerator(Type type)
         {
             if (type == null)
-                throw new InvalidOperationException("Cannot create generator because type was not specified.");
+                throw new GenerationException("Cannot create generator because type was not specified.");
 
             return (IGeneratable)Activator.CreateInstance(type);
         }

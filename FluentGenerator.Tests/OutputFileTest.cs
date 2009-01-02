@@ -34,7 +34,7 @@ namespace FluentGenerator.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [ExpectedException(typeof(GenerationException))]
         public void Should_throw_exception_if_another_OutputFile_is_created_before_the_first_one_is_disposed()
         {
             OutputFile file1 = new OutputFile("", _fileSystemService);

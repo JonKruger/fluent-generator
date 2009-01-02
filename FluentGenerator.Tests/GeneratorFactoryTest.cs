@@ -51,7 +51,7 @@ namespace FluentGenerator.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [ExpectedException(typeof(GenerationException))]
         public void Should_throw_exception_if_no_class_generator_was_specified()
         {
             _generatorFactory.CreateClassGenerator();
