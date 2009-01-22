@@ -23,10 +23,10 @@ namespace FluentGenerator
             get { return _fileSystemService; }
         }
 
-        //protected IGeneratorFactory GeneratorFactory
-        //{
-        //    get { return _generatorFactory; }
-        //}
+        protected IGeneratorFactory GeneratorFactory
+        {
+            get { return _generatorFactory; }
+        }
 
         public GeneratorBase(IGeneratorFactory generatorFactory, IFileSystemService fileSystemService) 
         {

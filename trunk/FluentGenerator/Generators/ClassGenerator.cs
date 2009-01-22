@@ -7,25 +7,34 @@ namespace FluentGenerator.Generators
 {
     public class ClassGenerator : IClassGenerator
     {
-        private FieldGeneratorCollection _fields = new FieldGeneratorCollection();
-        private PropertyGeneratorCollection _properties = new PropertyGeneratorCollection();
-        private MethodGeneratorCollection _methods = new MethodGeneratorCollection();
+        private IFieldGeneratorCollection _fields;
+        private IPropertyGeneratorCollection _properties;
+        private IMethodGeneratorCollection _methods;
+        private IGeneratorFactory _generatorFactory;
 
         public string Name { get; set; }
         
-        public FieldGeneratorCollection Fields
+        public IFieldGeneratorCollection Fields
         {
             get { return _fields; }
         }
 
-        public PropertyGeneratorCollection Properties
+        public IPropertyGeneratorCollection Properties
         {
             get { return _properties; }
         }
 
-        public MethodGeneratorCollection Methods
+        public IMethodGeneratorCollection Methods
         {
             get { return _methods; }
+        }
+
+        public ClassGenerator(IGeneratorFactory generatorFactory)
+        {
+            _generatorFactory = generatorFactory;
+            _fields = _generatorFactory.CreateFieldGeneratorCollection();
+            _properties = _generatorFactory.CreatePropertyGeneratorCollection();
+            _methods = _generatorFactory.CreateMethodGeneratorCollection();
         }
 
         public virtual void Generate(ICodeWriter codeWriter)

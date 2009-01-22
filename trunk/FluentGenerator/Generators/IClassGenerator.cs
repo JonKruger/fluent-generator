@@ -3,8 +3,8 @@ namespace FluentGenerator.Generators
     public interface IClassGenerator : IGeneratable
     {
         string Name { get; set; }
-        FieldGeneratorCollection Fields { get; }
-        PropertyGeneratorCollection Properties { get; }
-        MethodGeneratorCollection Methods { get; }
+        IFieldGeneratorCollection Fields { get; }
+        IPropertyGeneratorCollection Properties { get; }
+        IMethodGeneratorCollection Methods { get; }
     }
 }

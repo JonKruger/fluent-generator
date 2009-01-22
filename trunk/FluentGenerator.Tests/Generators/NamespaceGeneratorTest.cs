@@ -24,7 +24,7 @@ namespace FluentGenerator.Tests
             expected.AppendLine();
 
             NamespaceGenerator ns = new NamespaceGenerator {Name = "Sample.Namespace"};
-            ClassGenerator c = new ClassGenerator {Name = "Sample"};
+            ClassGenerator c = new ClassGenerator(new GeneratorFactory()) {Name = "Sample"};
             ns.GeneratableItems.Add(c);
             ns.Generate(_codeWriter);
 
