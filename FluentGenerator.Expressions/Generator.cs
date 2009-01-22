@@ -16,7 +16,7 @@ namespace FluentGenerator.Expressions
 
         public ClassExpression CreateClass(string className)
         {
-            ClassExpression classData = new ClassExpression();
+            ClassExpression classData = new ClassExpression(GeneratorFactory);
             if (_currentNamespace != null)
                 _currentNamespace.AddGeneratableItem(classData.Generator);
             else

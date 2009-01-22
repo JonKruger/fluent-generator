@@ -3,12 +3,18 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using Rhino.Mocks.Impl;
 using Rhino.Mocks.Interfaces;
+using StructureMap;
 
 namespace FluentGenerator.Tests
 {
     [TestFixture]
     public class Specification
     {
+        static Specification()
+        {
+            ObjectFactory.Initialize(x => x.AddRegistry<FluentGeneratorRegistry>());
+        }
+
         [SetUp]
         public void Initialize()
         {

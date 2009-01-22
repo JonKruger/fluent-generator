@@ -6,11 +6,16 @@ namespace FluentGenerator.Expressions
 {
     public class ListExpression : ClassExpression, IPropertyExpression
     {
-        private IPropertyGenerator _generator = new PropertyGenerator();
+        private IPropertyGenerator _generator;
 
         public IPropertyGenerator Generator
         {
             get { return _generator; }
+        }
+
+        public ListExpression(IGeneratorFactory generatorFactory) : base(generatorFactory)
+        {
+            _generator = generatorFactory.CreatePropertyGenerator();
         }
 
         public ListExpression Of(string objectType)

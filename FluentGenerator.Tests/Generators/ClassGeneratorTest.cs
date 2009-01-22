@@ -31,7 +31,7 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("{");
             expected.AppendLineFormat("}");
 
-            ClassGenerator data = new ClassGenerator {Name = "Sample"};
+            ClassGenerator data = new ClassGenerator(new GeneratorFactory()) { Name = "Sample" };
             data.Generate(_codeWriter);
             _codeWriter.ToString().ShouldBe(expected.ToString());
         }
@@ -45,7 +45,7 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    public string Property { get; set; }");
             expected.AppendLineFormat("}");
 
-            ClassGenerator data = new ClassGenerator { Name = "Sample" };
+            ClassGenerator data = new ClassGenerator(new GeneratorFactory()) { Name = "Sample" };
             data.Properties.Add(new PropertyGenerator {Name = "Property", Type = "string"});
             data.Generate(_codeWriter);
             _codeWriter.ToString().ShouldBe(expected.ToString());
@@ -60,7 +60,7 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    public string _field;");
             expected.AppendLineFormat("}");
 
-            ClassGenerator data = new ClassGenerator { Name = "Sample" };
+            ClassGenerator data = new ClassGenerator(new GeneratorFactory()) { Name = "Sample" };
             data.Fields.Add(new FieldGenerator() { Name = "_field", Type = "string" });
             data.Generate(_codeWriter);
             _codeWriter.ToString().ShouldBe(expected.ToString());
@@ -77,7 +77,7 @@ namespace FluentGenerator.Tests
             expected.AppendLineFormat("    }");
             expected.AppendLineFormat("}");
 
-            ClassGenerator data = new ClassGenerator { Name = "Sample" };
+            ClassGenerator data = new ClassGenerator(new GeneratorFactory()) { Name = "Sample" };
             data.Methods.Add(new MethodGenerator() { Name = "Method", ReturnType = "string" });
             data.Generate(_codeWriter);
             _codeWriter.ToString().ShouldBe(expected.ToString());
@@ -98,7 +98,7 @@ namespace FluentGenerator.Tests
             expected.AppendLine("    }");
             expected.AppendLine("}");
 
-            ClassGenerator data = new ClassGenerator { Name = "Sample" };
+            ClassGenerator data = new ClassGenerator(new GeneratorFactory()) { Name = "Sample" };
             data.Methods.Add(new MethodGenerator() { Name = "Method", ReturnType = "string" });
             data.Fields.Add(new FieldGenerator() { Name = "_field", Type = "string" });
             data.Properties.Add(new PropertyGenerator { Name = "Property", Type = "string" });

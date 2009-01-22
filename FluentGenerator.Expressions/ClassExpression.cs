@@ -9,11 +9,18 @@ namespace FluentGenerator.Expressions
 {
     public class ClassExpression : IClassExpression
     {
-        private IClassGenerator _generator = new ClassGenerator();
+        private IClassGenerator _generator;
+        private IGeneratorFactory _generatorFactory;
 
         public IClassGenerator Generator
         {
             get { return _generator; }
+        }
+
+        public ClassExpression(IGeneratorFactory generatorFactory)
+        {
+            _generatorFactory = generatorFactory;
+            _generator = _generatorFactory.CreateClassGenerator();
         }
 
         public ClassExpression WithName(string className)
@@ -42,7 +49,7 @@ namespace FluentGenerator.Expressions
 
         public PropertyExpression AddProperty(string name)
         {
-            PropertyExpression propertyExpression = new PropertyExpression().WithName(name);
+            PropertyExpression propertyExpression = new PropertyExpression(_generatorFactory).WithName(name);
             _generator.Properties.Add(propertyExpression.Generator);
             return propertyExpression;            
         }
@@ -62,7 +69,7 @@ namespace FluentGenerator.Expressions
 
         public ListExpression AddListOf(string listType)
         {
-            ListExpression listExpression = new ListExpression();
+            ListExpression listExpression = new ListExpression(_generatorFactory);
             _generator.Properties.Add(listExpression.Of(listType).Generator);
             return listExpression;
         }

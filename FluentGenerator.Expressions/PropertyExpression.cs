@@ -7,16 +7,16 @@ namespace FluentGenerator.Expressions
 {
     public class PropertyExpression : ClassExpression, IPropertyExpression
     {
-        private IPropertyGenerator _generator = new PropertyGenerator();
+        private IPropertyGenerator _generator;
 
         public IPropertyGenerator Generator
         {
             get { return _generator; }
         }
 
-        public PropertyExpression() 
+        public PropertyExpression(IGeneratorFactory generatorFactory) : base(generatorFactory)
         {
-            _generator = new PropertyGenerator();
+            _generator = generatorFactory.CreatePropertyGenerator();
         }
 
         public new PropertyExpression WithName(string name)

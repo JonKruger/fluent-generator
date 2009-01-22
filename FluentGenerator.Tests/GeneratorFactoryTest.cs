@@ -36,9 +36,9 @@ namespace FluentGenerator.Tests
             #region Implementation of IClassGenerator
 
             public string Name { get; set; }
-            public FieldGeneratorCollection Fields { get; private set; }
-            public PropertyGeneratorCollection Properties { get; private set; }
-            public MethodGeneratorCollection Methods { get; private set; }
+            public IFieldGeneratorCollection Fields { get; private set; }
+            public IPropertyGeneratorCollection Properties { get; private set; }
+            public IMethodGeneratorCollection Methods { get; private set; }
 
             #endregion
         }
@@ -54,6 +54,7 @@ namespace FluentGenerator.Tests
         [ExpectedException(typeof(GenerationException))]
         public void Should_throw_exception_if_no_class_generator_was_specified()
         {
+            _generatorFactory.Reset();
             _generatorFactory.CreateClassGenerator();
         }
     }
@@ -98,6 +99,7 @@ namespace FluentGenerator.Tests
         [ExpectedException(typeof(GenerationException))]
         public void Should_throw_exception_if_no_namespace_generator_was_specified()
         {
+            _generatorFactory.Reset();
             _generatorFactory.CreateNamespaceGenerator();
         }
     }
@@ -153,6 +155,7 @@ namespace FluentGenerator.Tests
         [ExpectedException(typeof(GenerationException))]
         public void Should_throw_exception_if_no_property_generator_was_specified()
         {
+            _generatorFactory.Reset();
             _generatorFactory.CreatePropertyGenerator();
         }
     }
@@ -198,6 +201,7 @@ namespace FluentGenerator.Tests
         [ExpectedException(typeof(GenerationException))]
         public void Should_throw_exception_if_no_field_generator_was_specified()
         {
+            _generatorFactory.Reset();
             _generatorFactory.CreateFieldGenerator();
         }
     }
@@ -234,6 +238,7 @@ namespace FluentGenerator.Tests
         [ExpectedException(typeof(GenerationException))]
         public void Should_throw_exception_if_no_method_generator_was_specified()
         {
+            _generatorFactory.Reset();
             _generatorFactory.CreateMethodGenerator();
         }
     }

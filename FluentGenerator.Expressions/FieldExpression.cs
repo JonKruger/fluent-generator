@@ -9,11 +9,16 @@ namespace FluentGenerator.Expressions
 {
     public class FieldExpression : ClassExpression, IFieldExpression
     {
-        private IFieldGenerator _generator = new FieldGenerator();
+        private IFieldGenerator _generator;
 
         public IFieldGenerator Generator
         {
             get { return _generator; }
+        }
+
+        public FieldExpression(IGeneratorFactory generatorFactory) : base(generatorFactory)
+        {
+            _generator = generatorFactory.CreateFieldGenerator();
         }
 
         public new FieldExpression WithName(string name)
