@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -242,4 +243,98 @@ namespace FluentGenerator.Tests
             _generatorFactory.CreateMethodGenerator();
         }
     }
+
+    [TestFixture]
+    public class When_creating_a_method_generator_collection : Given_a_GeneratorFactory
+    {
+        public class TestMethodGeneratorCollection : List<IMethodGenerator>, IMethodGeneratorCollection
+        {
+            #region Implementation of IGeneratable
+
+            public void Generate(ICodeWriter codeWriter)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            #endregion
+        }
+
+        [Test]
+        public void Should_create_an_instance_of_the_specified_method_generator_collection()
+        {
+            _generatorFactory.MethodGeneratorCollectionTypeIs<TestMethodGeneratorCollection>();
+            _generatorFactory.CreateMethodGeneratorCollection().ShouldBeOfType<TestMethodGeneratorCollection>();
+        }
+
+        [Test]
+        [ExpectedException(typeof(GenerationException))]
+        public void Should_throw_exception_if_no_method_generator_collection_was_specified()
+        {
+            _generatorFactory.Reset();
+            _generatorFactory.CreateMethodGeneratorCollection();
+        }
+    }
+
+    [TestFixture]
+    public class When_creating_a_property_generator_collection : Given_a_GeneratorFactory
+    {
+        public class TestPropertyGeneratorCollection : List<IPropertyGenerator>, IPropertyGeneratorCollection
+        {
+            #region Implementation of IGeneratable
+
+            public void Generate(ICodeWriter codeWriter)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            #endregion
+        }
+
+        [Test]
+        public void Should_create_an_instance_of_the_specified_property_generator_collection()
+        {
+            _generatorFactory.PropertyGeneratorCollectionTypeIs<TestPropertyGeneratorCollection>();
+            _generatorFactory.CreatePropertyGeneratorCollection().ShouldBeOfType<TestPropertyGeneratorCollection>();
+        }
+
+        [Test]
+        [ExpectedException(typeof(GenerationException))]
+        public void Should_throw_exception_if_no_property_generator_collection_was_specified()
+        {
+            _generatorFactory.Reset();
+            _generatorFactory.CreatePropertyGeneratorCollection();
+        }
+    }
+
+    [TestFixture]
+    public class When_creating_a_field_generator_collection : Given_a_GeneratorFactory
+    {
+        public class TestFieldGeneratorCollection : List<IFieldGenerator>, IFieldGeneratorCollection
+        {
+            #region Implementation of IGeneratable
+
+            public void Generate(ICodeWriter codeWriter)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            #endregion
+        }
+
+        [Test]
+        public void Should_create_an_instance_of_the_specified_field_generator()
+        {
+            _generatorFactory.FieldGeneratorCollectionTypeIs<TestFieldGeneratorCollection>();
+            _generatorFactory.CreateFieldGeneratorCollection().ShouldBeOfType<TestFieldGeneratorCollection>();
+        }
+
+        [Test]
+        [ExpectedException(typeof(GenerationException))]
+        public void Should_throw_exception_if_no_field_generator_was_specified()
+        {
+            _generatorFactory.Reset();
+            _generatorFactory.CreateFieldGeneratorCollection();
+        }
+    }
+
 }
