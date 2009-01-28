@@ -17,6 +17,11 @@ namespace FluentGenerator.Expressions
             get { return _generator; }
         }
 
+        public virtual IClassGenerator CurrentClassGenerator
+        {
+            get { return _generator; }
+        }
+
         public ClassExpression(IGeneratorFactory generatorFactory)
         {
             _generatorFactory = generatorFactory;
@@ -25,7 +30,7 @@ namespace FluentGenerator.Expressions
 
         public ClassExpression WithName(string className)
         {
-            _generator.Name = className;
+            CurrentClassGenerator.Name = className;
             return this;
         }
 
@@ -49,28 +54,28 @@ namespace FluentGenerator.Expressions
 
         public PropertyExpression AddProperty(string name)
         {
-            PropertyExpression propertyExpression = new PropertyExpression(_generatorFactory).WithName(name);
-            _generator.Properties.Add(propertyExpression.Generator);
+            PropertyExpression propertyExpression = new PropertyExpression(_generatorFactory, _generator).WithName(name);
+            CurrentClassGenerator.Properties.Add(propertyExpression.Generator);
             return propertyExpression;            
         }
 
         public ClassExpression AddProperty(IPropertyExpression propertyExpression)
         {
-            _generator.Properties.Add(propertyExpression.Generator);
+            CurrentClassGenerator.Properties.Add(propertyExpression.Generator);
             return this;
         }
 
         public ClassExpression AddProperties(IList<IPropertyExpression> propertyExpressions)
         {
             foreach (var property in propertyExpressions)
-                _generator.Properties.Add(property.Generator);
+                CurrentClassGenerator.Properties.Add(property.Generator);
             return this;
         }
 
         public ListExpression AddListOf(string listType)
         {
-            ListExpression listExpression = new ListExpression(_generatorFactory);
-            _generator.Properties.Add(listExpression.Of(listType).Generator);
+            ListExpression listExpression = new ListExpression(_generatorFactory, _generator);
+            CurrentClassGenerator.Properties.Add(listExpression.Of(listType).Generator);
             return listExpression;
         }
 
