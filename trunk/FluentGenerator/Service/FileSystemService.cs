@@ -17,5 +17,25 @@ namespace FluentGenerator.Service
                 writer.Close();
             }
         }
+
+        public void Copy(string sourceFileName, string destFileName, bool overwrite)
+        {
+            File.Copy(sourceFileName, destFileName, overwrite);
+        }
+
+        public bool Exists(string path)
+        {
+            return File.Exists(path);
+        }
+
+        public bool DirectoryExists(string path)
+        {
+            return Directory.Exists(path);
+        }
+
+        public void CreateDiretory(string path)
+        {
+            Directory.CreateDirectory(path);
+        }
     }
 }

@@ -10,8 +10,8 @@ namespace FluentGenerator
     public abstract class GeneratorBase : IGenerator
     {
         private static IGenerator _current;
-        private IFileSystemService _fileSystemService;
-        private IGeneratorFactory _generatorFactory;
+        protected IFileSystemService _fileSystemService;
+        protected IGeneratorFactory _generatorFactory;
 
         public static IGenerator Current
         {

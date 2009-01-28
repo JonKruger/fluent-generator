@@ -299,5 +299,33 @@ namespace FluentGenerator.Tests
         {
             Assert.IsInstanceOfType(typeof(T), actual);
         }
+
+
+        public static void ShouldBeAnIdenticalListTo<T>(this IEnumerable<T> list1, IEnumerable<T> list2)
+        {
+            if ((list1 == null && list2 == null) || (list1 == list2))
+                return;
+
+            var identical = true;
+            if ((list1 == null && list2 != null) || (list1 != null && list2 == null) || (list1.Count() != list2.Count()))
+                identical = false;
+            else
+            {
+                var tempList1 = new List<T>(list1);
+                var tempList2 = new List<T>(list2);
+                for (int i = 0; i < tempList1.Count; i++)
+                {
+                    if (!tempList1[i].Equals(tempList2[i]))
+                    {
+                        identical = false;
+                        break;
+                    }
+                }
+            }
+
+            if (!identical)
+                Assert.Fail("List were not identical.");
+        }
+
     }
 }

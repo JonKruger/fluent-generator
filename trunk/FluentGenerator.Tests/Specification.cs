@@ -20,6 +20,7 @@ namespace FluentGenerator.Tests
         {
             Mocks = new MockRepository();
             Before_each();
+            ReplayAll();
         }
 
         [TearDown]
