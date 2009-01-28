@@ -8,15 +8,25 @@ namespace FluentGenerator.Expressions
     public class PropertyExpression : ClassExpression, IPropertyExpression
     {
         private IPropertyGenerator _generator;
+        private IClassGenerator _parentClassGenerator;
 
         public IPropertyGenerator Generator
         {
             get { return _generator; }
         }
 
-        public PropertyExpression(IGeneratorFactory generatorFactory) : base(generatorFactory)
+        public override IClassGenerator CurrentClassGenerator
+        {
+            get
+            {
+                return _parentClassGenerator;
+            }
+        }
+
+        public PropertyExpression(IGeneratorFactory generatorFactory, IClassGenerator parentClassGenerator) : base(generatorFactory)
         {
             _generator = generatorFactory.CreatePropertyGenerator();
+            _parentClassGenerator = parentClassGenerator;
         }
 
         public new PropertyExpression WithName(string name)

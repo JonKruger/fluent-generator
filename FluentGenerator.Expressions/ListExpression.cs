@@ -7,14 +7,24 @@ namespace FluentGenerator.Expressions
     public class ListExpression : ClassExpression, IPropertyExpression
     {
         private IPropertyGenerator _generator;
+        private IClassGenerator _parentClassGenerator;
 
         public IPropertyGenerator Generator
         {
             get { return _generator; }
         }
 
-        public ListExpression(IGeneratorFactory generatorFactory) : base(generatorFactory)
+        public override IClassGenerator CurrentClassGenerator
         {
+            get
+            {
+                return _parentClassGenerator;
+            }
+        }
+
+        public ListExpression(IGeneratorFactory generatorFactory, IClassGenerator parentClassGenerator) : base(generatorFactory)
+        {
+            _parentClassGenerator = parentClassGenerator;
             _generator = generatorFactory.CreatePropertyGenerator();
         }
 

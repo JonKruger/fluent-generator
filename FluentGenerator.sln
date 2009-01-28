@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentGenerator.Tests", "Fl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentGenerator.Expressions", "FluentGenerator.Expressions\FluentGenerator.Expressions.csproj", "{B5210459-1D52-46F5-BF24-7FB1A493F8C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentGenerator.Expressions.Tests", "FluentGenerator.Expressions.Tests\FluentGenerator.Expressions.Tests.csproj", "{4F88D20A-3546-471F-BF7E-70D65D6A42A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{B5210459-1D52-46F5-BF24-7FB1A493F8C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5210459-1D52-46F5-BF24-7FB1A493F8C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5210459-1D52-46F5-BF24-7FB1A493F8C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F88D20A-3546-471F-BF7E-70D65D6A42A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F88D20A-3546-471F-BF7E-70D65D6A42A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F88D20A-3546-471F-BF7E-70D65D6A42A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F88D20A-3546-471F-BF7E-70D65D6A42A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
