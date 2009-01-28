@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentGenerator.Expressions
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentGenerator.Expressions.Tests", "FluentGenerator.Expressions.Tests\FluentGenerator.Expressions.Tests.csproj", "{4F88D20A-3546-471F-BF7E-70D65D6A42A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentGenerator.MyGeneration.Plugin", "FluentGenerator.MyGeneration.Plugin\FluentGenerator.MyGeneration.Plugin.csproj", "{0BA947AA-7CC2-49E4-861F-A18EFF319B87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentGenerator.MyGeneration.Plugin.Tests", "FluentGenerator.MyGeneration.Plugin.Tests\FluentGenerator.MyGeneration.Plugin.Tests.csproj", "{4B8331E5-625F-4189-BBC8-5F935A659AC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,14 @@ Global
 		{4F88D20A-3546-471F-BF7E-70D65D6A42A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F88D20A-3546-471F-BF7E-70D65D6A42A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F88D20A-3546-471F-BF7E-70D65D6A42A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BA947AA-7CC2-49E4-861F-A18EFF319B87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BA947AA-7CC2-49E4-861F-A18EFF319B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BA947AA-7CC2-49E4-861F-A18EFF319B87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BA947AA-7CC2-49E4-861F-A18EFF319B87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B8331E5-625F-4189-BBC8-5F935A659AC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B8331E5-625F-4189-BBC8-5F935A659AC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B8331E5-625F-4189-BBC8-5F935A659AC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B8331E5-625F-4189-BBC8-5F935A659AC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

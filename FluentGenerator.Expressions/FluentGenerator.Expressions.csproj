@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StructureMap, Version=2.5.2.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External Assemblies\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -55,6 +59,10 @@
     <Compile Include="PropertyExpression.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FluentGenerator.MyGeneration.Plugin\FluentGenerator.MyGeneration.Plugin.csproj">
+      <Project>{0BA947AA-7CC2-49E4-861F-A18EFF319B87}</Project>
+      <Name>FluentGenerator.MyGeneration.Plugin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FluentGenerator\FluentGenerator.csproj">
       <Project>{CBFAD952-8C87-41D0-B23A-501BBAB39BA5}</Project>
       <Name>FluentGenerator</Name>

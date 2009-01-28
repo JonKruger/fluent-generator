@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FluentGenerator.Expressions;
+using FluentGenerator.MyGeneration.Plugin;
 using StructureMap;
 
 namespace FluentGenerator.Example
@@ -11,7 +12,11 @@ namespace FluentGenerator.Example
     {
         static SampleGenerator()
         {
-            ObjectFactory.Initialize(x => x.AddRegistry<FluentGeneratorRegistry>());
+            ObjectFactory.Initialize(x =>
+                                         {
+                                             x.AddRegistry<FluentGeneratorRegistry>();
+                                             x.AddRegistry<MyGenerationPluginRegistry>();
+                                         });
         }
 
         public override void Generate()
@@ -28,6 +33,9 @@ namespace FluentGenerator.Example
                 //CreateClass("Truck")
                 //    .FromDatabaseTable("Trucks");
             }
+
+            RunMyGenerationTemplate(new Dictionary<string, object> { { "1", "hello" } }, 
+                @"c:\proj\fluent-generator\SampleMygenerationtemplate.csgen", @"c:\temp\output.cs");
         }
     }
 }
