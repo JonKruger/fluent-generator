@@ -37,6 +37,11 @@ namespace FluentGenerator
 
         public GeneratorBase()
         {
+            ObjectFactory.Configure(x =>
+            {
+                x.AddRegistry<FluentGeneratorRegistry>();
+            });
+            
             _current = this;
             _generatorFactory = ObjectFactory.GetInstance<IGeneratorFactory>();
             _fileSystemService = ObjectFactory.GetInstance<IFileSystemService>();

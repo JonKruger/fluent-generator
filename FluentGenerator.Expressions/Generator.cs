@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using FluentGenerator.MyGeneration.Plugin;
 using FluentGenerator.Service;
 using StructureMap;
 
@@ -22,6 +23,11 @@ namespace FluentGenerator.Expressions
         public Generator()
             : base()
         {
+            ObjectFactory.Configure(x =>
+            {
+                x.AddRegistry<MyGenerationPluginRegistry>();
+            });
+
             _myGenerationService = ObjectFactory.GetInstance<IMyGenerationService>();
         }
 
