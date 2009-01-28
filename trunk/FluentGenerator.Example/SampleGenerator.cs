@@ -10,15 +10,6 @@ namespace FluentGenerator.Example
 {
     public class SampleGenerator : Generator
     {
-        static SampleGenerator()
-        {
-            ObjectFactory.Initialize(x =>
-                                         {
-                                             x.AddRegistry<FluentGeneratorRegistry>();
-                                             x.AddRegistry<MyGenerationPluginRegistry>();
-                                         });
-        }
-
         public override void Generate()
         {
             using (new OutputFile(@"c:\temp\Driver.cs"))
