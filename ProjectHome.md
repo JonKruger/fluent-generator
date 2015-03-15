@@ -1,0 +1,1 @@
+A fluent interface for code generation.  You describe what you want it to do and it will go do it for you.
